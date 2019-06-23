@@ -25,6 +25,7 @@ target 'Jarvis' do
   pod 'Fabric', '~> 1.9.0'
   pod 'Crashlytics', '~> 3.12.0'
 
+
   pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
 
 end
@@ -41,3 +42,11 @@ target 'Jarvis-tvOS' do
   end
 
 end
+
+post_install do |installer|
+    installer.pods_project.targets.each do |target|
+      if target.name == "React"
+        target.remove_from_project
+      end
+    end
+  end
