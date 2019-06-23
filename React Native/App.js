@@ -6,9 +6,9 @@ import firebase from 'react-native-firebase';
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
 
 // import the different screens
-import Loading from './Components/Loading'
-import SignUp from './Components/SignUp'
-import Login from './Components/Login'
+import Loading from './Components/Auth/Loading'
+import SignUp from './Components/Auth/SignUp'
+import Login from './Components/Auth/Login'
 import Main from './Components/Main'
 
 // create our app's navigation stack

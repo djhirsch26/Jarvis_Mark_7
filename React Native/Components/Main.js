@@ -1,33 +1,26 @@
 import React from 'react'
 import { StyleSheet, Platform, Image, Text, View } from 'react-native'
 import firebase from 'react-native-firebase'
+import Icon from 'react-native-vector-icons/FontAwesome';
 
-export default class Main extends React.Component {
-  state = { currentUser: null }
+import { createMaterialBottomTabNavigator } from "react-navigation-material-bottom-tabs";
 
-  componentDidMount() {
-    const { currentUser } = firebase.auth()
+import Home from './Home/Home'
+import FileView from './File/FileView'
 
-    this.setState({ currentUser })
+const myIcon1 = ({focused, tintColor}) => <Icon name="home" size={20} color={tintColor}/>;
+const myIcon2 = ({focused, tintColor}) => <Icon name="file" size={20} color={tintColor}/>;
+
+
+export default Main = createMaterialBottomTabNavigator(
+  {
+    Home: {screen: Home,  navigationOptions: { title: 'Home', tabBarIcon: myIcon1}},
+    FileView: {screen: FileView,  navigationOptions: { title: 'Files', tabBarIcon: myIcon2}},
+  },
+  {
+    initialRouteName: 'Home',
+    activeColor: '#f0edf6',
+    inactiveColor: '#3e2465',
+    barStyle: { backgroundColor: '#694fad' },
   }
-
-  render() {
-    const { currentUser } = this.state
-
-    return (
-      <View style={styles.container}>
-        <Text>
-          Hi {currentUser && currentUser.email}!
-        </Text>
-      </View>
-    )
-  }
-}
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
-    alignItems: 'center'
-  }
-})
+);
