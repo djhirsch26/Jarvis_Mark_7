@@ -1,1 +1,20 @@
-- Had to do some stuff with Robot font adding
+- Had to do some stuff with Roboto font adding
+
+
+
+For folly error:
+- watchman watch-del-all && rm -rf ~/.rncache/* && rm -rf /tmp/metro-bundler-cache-* && rm -rf /tmp/haste-map-react-native-packager-* && rm -rf node_modules/ && npm install
+Make sure to restart with reset cache:
+npm start -- --reset-cache
+
+
+
+To deal with missing font file:
+1. Remove it from the pod file
+2. react-native unlink react-native-vector-icons && npm remove react-native-vector-icons
+3. react-native react-native link react-native-vector-icons
+
+
+
+To get command line back:
+- npm install -g react-native-cli
