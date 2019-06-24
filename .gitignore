@@ -2,3 +2,4 @@
 *.pub
 build
 Pods
+**/private
