@@ -27,3 +27,8 @@ for build to complete. Putting dependencies back afterwards and running pod inst
 then running another build, restored the build issues.
 
 You need a fixed version of NMSSH, 2.2.8
+
+
+----------------
+
+Must use js remote debug to see current file state

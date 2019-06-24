@@ -10,8 +10,10 @@ RUN apt-get update && \
 
 # Create Chroot jail
 COPY ./chrootjail.sh /tmp
+COPY .bashrc /tmp
 RUN chmod +x /tmp/chrootjail.sh
 RUN /tmp/chrootjail.sh
+
 
 # Add Users
 RUN useradd -ms /bin/bash jarvis -p jarvis && \

@@ -67,7 +67,7 @@ export default class SSH extends React.Component {
   }
 
   onConnectPress() {
-    const client = new SSHClient('127.0.0.1', 3030, 'jarvis', 'jarvis', function(error) {
+    const client = new SSHClient('127.0.0.1', 3030, 'jarvisRemote', 'jarvis', function(error) {
       if (error) {
         console.warn(error);
         this.setState({connected: false})
