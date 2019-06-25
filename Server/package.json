@@ -1,0 +1,16 @@
+{
+  "name": "jarvis_server",
+  "version": "1.0.0",
+  "description": "Backend server for Jarvis",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "nodemon app.js"
+  },
+  "author": "djhirsch26@gmail.com",
+  "license": "ISC",
+  "dependencies": {
+    "express": "^4.17.1",
+    "firebase-admin": "^8.2.0"
+  }
+}
