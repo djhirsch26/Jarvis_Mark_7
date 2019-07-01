@@ -3,6 +3,10 @@ var app = express();
 var port = process.env.PORT || 3000;
 var router = express.Router();
 
+const fileServer = require('./controllers/file')
+fileServer.connect()
+
+
 app.use(require('./routes'))
 
 app.listen(port, function () {

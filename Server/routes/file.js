@@ -10,8 +10,18 @@ router.get('/', function(req, res) {
   res.send('Empty File Command')
 })
 
+router.get('/test', function(req, res) {
+  // console.log(req,res)
+  res.send('Test Command')
+})
+
 router.get('/ls', function(req, res) {
-  res.send('I am the ls command')
+  SFTP.ls(req.params.path).then((data) => {
+    console.log(data)
+    res.send(data)
+  }).catch(err => {
+    res.status(500).send(err)
+  })
 })
 
 module.exports = router

@@ -126,4 +126,5 @@ Subsystem	sftp	/usr/lib/openssh/sftp-server
 Match User jarvisRemote
   ChrootDirectory /var/jail/
   X11Forwarding no
+  ForceCommand internal-sftp
   AllowTcpForwarding no

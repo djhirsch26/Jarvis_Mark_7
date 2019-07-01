@@ -1,9 +1,13 @@
-import React from 'react';
+import React, {Component} from 'react';
 import { StyleSheet, Platform, Image, Text, View, ScrollView } from 'react-native';
-
+import { createStore, applyMiddleware } from 'redux';
+import { Provider, connect } from 'react-redux';
 import firebase from 'react-native-firebase';
-
+import thunk from 'redux-thunk';
 import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+
+import reducers from './reducers'
+import firebaseMiddleware from './middleware/firebase'
 
 // import the different screens
 import Loading from './Components/Auth/Loading'
@@ -12,7 +16,7 @@ import Login from './Components/Auth/Login'
 import Main from './Components/Main'
 
 // create our app's navigation stack
-export default createAppContainer(createSwitchNavigator({
+const AppContainer = createAppContainer(createSwitchNavigator({
   Loading,
   SignUp,
   Login,
@@ -21,6 +25,20 @@ export default createAppContainer(createSwitchNavigator({
 {
   initialRouteName: 'Loading'
 }));
+
+console.log('FIREBASE MIDDLEWARE IS: ', firebaseMiddleware)
+
+const store = createStore(reducers, applyMiddleware(firebaseMiddleware, thunk));
+
+export default class App extends Component {
+  render() {
+    return (
+      <Provider store={store}>
+        <AppContainer />
+      </Provider>
+    );
+  }
+}
 
 // export default class App extends React.Component {
 //   constructor() {

@@ -1,7 +1,11 @@
 import React from 'react'
 import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 
-export default class Loading extends React.Component {
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+
+
+class Loading extends React.Component {
   componentDidMount() {
 
   }
@@ -14,6 +18,19 @@ export default class Loading extends React.Component {
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Loading);
 
 const styles = StyleSheet.create({
   container: {

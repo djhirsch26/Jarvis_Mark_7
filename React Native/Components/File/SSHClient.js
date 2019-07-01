@@ -1,17 +1,16 @@
 import React from 'react'
 import { View, ScrollView, Text, TextInput, ActivityIndicator, Button, StyleSheet } from 'react-native'
-
 import SSHClient from 'react-native-ssh-sftp';
-
 import {privateKey, publicKey} from './private/private_key'
+import { bindActionCreators } from 'redux';
+import {connect} from 'react-redux';
+import firebase from 'react-native-firebase'
 
-export default class SSH extends React.Component {
+import {testAuth} from '../../actions'
 
-  // constructor() {
-  //   super()
-  //   this.state = {connected: false}
-  //   this.client = undefined
-  // }
+
+
+class SSH extends React.Component {
 
   state = {
     connected: false,
@@ -85,6 +84,10 @@ export default class SSH extends React.Component {
     }.bind(this));
   }
 
+  onTestServerPress() {
+    this.props.testAuth(this.props.user.token)
+  }
+
   onTextSubmit() {
     this.runCommand()
   }
@@ -122,10 +125,30 @@ export default class SSH extends React.Component {
           color="#841584"
           accessibilityLabel="Learn more about this purple button"
         />
+        <Button
+          onPress={this.onTestServerPress.bind(this)}
+          title="TEST THE SERVER"
+          color="#841584"
+          accessibilityLabel="Learn more about this purple button"
+        />
       </ScrollView>
     )
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    user: state.user
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({
+    testAuth,
+  }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SSH);
 
 const styles = StyleSheet.create({
   container: {

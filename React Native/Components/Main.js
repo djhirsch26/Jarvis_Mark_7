@@ -18,7 +18,7 @@ export default Main = createMaterialBottomTabNavigator(
     FileView: {screen: FileView,  navigationOptions: { title: 'Files', tabBarIcon: myIcon2}},
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'FileView',
     activeColor: '#f0edf6',
     inactiveColor: '#3e2465',
     barStyle: { backgroundColor: '#694fad' },
