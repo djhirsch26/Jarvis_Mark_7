@@ -7,15 +7,20 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 
 import Home from './Home/Home'
 import FileView from './File/FileView'
+import Console_ from './File/Console'
 
-const myIcon1 = ({focused, tintColor}) => <Icon name="home" size={20} color={tintColor}/>;
-const myIcon2 = ({focused, tintColor}) => <Icon name="file" size={20} color={tintColor}/>;
+
+const homeIcon = ({focused, tintColor}) => <Icon name="home" size={20} color={tintColor}/>;
+const fileIcon = ({focused, tintColor}) => <Icon name="file" size={20} color={tintColor}/>;
+const consoleIcon = ({focused, tintColor}) => <Icon name="laptop" size={20} color={tintColor}/>;
 
 
 export default Main = createMaterialBottomTabNavigator(
   {
-    Home: {screen: Home,  navigationOptions: { title: 'Home', tabBarIcon: myIcon1}},
-    FileView: {screen: FileView,  navigationOptions: { title: 'Files', tabBarIcon: myIcon2}},
+    Home: {screen: Home,  navigationOptions: { title: 'Home', tabBarIcon: homeIcon}},
+    FileView: {screen: FileView,  navigationOptions: { title: 'Files', tabBarIcon: fileIcon}},
+    Console_: {screen: Console_,  navigationOptions: { title: 'Console', tabBarIcon: consoleIcon}},
+
   },
   {
     initialRouteName: 'FileView',

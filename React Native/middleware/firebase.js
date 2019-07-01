@@ -10,7 +10,6 @@ export default function firebaseMiddleware({ dispatch, getState }) {
 
     if (action.type == REQUIRE_TOKEN) {
 
-      console.log('QUIIIIII')
       const {token, acquiredToken} = getState().user
 
       if (!token || Date.now() - acquiredToken > 60*60*1000) {

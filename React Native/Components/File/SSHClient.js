@@ -6,7 +6,10 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 import firebase from 'react-native-firebase'
 
-import {testAuth} from '../../actions'
+import {
+  testAuth,
+  listDirectory_
+} from '../../actions'
 
 
 
@@ -22,20 +25,7 @@ class SSH extends React.Component {
   }
 
   runLS() {
-    if (this.state.connected) {
-      console.log(this.client)
-
-      var command = 'ls';
-      this.client.execute(command, (error, output) => {
-        if (error) {
-          console.warn(error);
-          this.setState({output: error});
-        }
-        if (output)
-          console.log(output);
-          this.setState({output});
-      });
-    }
+    this.props.listDirectory_('/noexist')
   }
 
   runCommand() {
@@ -85,7 +75,7 @@ class SSH extends React.Component {
   }
 
   onTestServerPress() {
-    this.props.testAuth(this.props.user.token)
+    this.props.testAuth()
   }
 
   onTextSubmit() {
@@ -145,6 +135,7 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     testAuth,
+    listDirectory_
   }, dispatch);
 }
 

@@ -26,8 +26,6 @@ const AppContainer = createAppContainer(createSwitchNavigator({
   initialRouteName: 'Loading'
 }));
 
-console.log('FIREBASE MIDDLEWARE IS: ', firebaseMiddleware)
-
 const store = createStore(reducers, applyMiddleware(firebaseMiddleware, thunk));
 
 export default class App extends Component {

@@ -9,7 +9,6 @@ import {setUserData, setUserToken} from '../../actions'
 class Loading extends React.Component {
   componentDidMount() {
     firebase.auth().onAuthStateChanged(user => {
-      console.log('Mounting with User?', user)
       if (user) {
         this.props.setUserData(user._user)
       }

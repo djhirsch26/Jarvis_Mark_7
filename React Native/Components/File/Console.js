@@ -3,26 +3,20 @@ import { StyleSheet, Platform, Image, Text, View, Header } from 'react-native'
 import firebase from 'react-native-firebase'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Toolbar, Button, COLOR } from 'react-native-material-ui';
-import { bindActionCreators } from 'redux';
-import {connect} from 'react-redux';
 
-import {
-  listDirectory,
-} from '../../actions'
+import SSH from './SSHClient'
 
-class FileView extends React.Component {
+export default class FileView extends React.Component {
   state = { currentUser: null }
 
   componentDidMount() {
     const { currentUser } = firebase.auth()
-    this.props.listDirectory(this.props.pwd)
+
     this.setState({ currentUser })
   }
 
   render() {
     const { currentUser } = this.state
-
-    console.log(this.props.contents)
 
     return (
       <View style={styles.container}>
@@ -35,27 +29,12 @@ class FileView extends React.Component {
           <Text>
             This will be the file server access page
           </Text>
+          <SSH/>
         </View>
       </View>
     )
   }
 }
-
-function mapStateToProps(state) {
-  return {
-    user: state.user,
-    ...state.fileView,
-
-  };
-}
-
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    listDirectory
-  }, dispatch);
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(FileView);
 
 const styles = StyleSheet.create({
   container: {

@@ -6,8 +6,6 @@ function connect(req, res, next) {
 
   let sftp = new Client();
 
-  console.log(credentials.JARVIS_HOST, credentials.JARVIS_PORT, credentials.JARVIS_USERNAME,credentials.JARVIS_PASSWORD)
-
   sftp.connect({
     host: '127.0.0.1',
     port: '3030',
@@ -16,9 +14,9 @@ function connect(req, res, next) {
   }).then(() => {
       return sftp.list('/');
   }).then((data) => {
-      console.log(data, 'the data info');
+      // console.log(data, 'the data info');
   }).catch((err) => {
-      console.log(err, 'catch error');
+      // console.log(err, 'catch error');
   });
 
   global.SFTP = {
