@@ -6,6 +6,7 @@ export const REQUIRE_TOKEN = 'require-token'
 
 // File Viewer actions
 export const VIEW_DIR = 'view-dir'
+export const FETCH_FILE = 'fetch-file'
 
 // SERVER ENDPOINTS
 export const BASE_URL = 'http://localhost:3000'

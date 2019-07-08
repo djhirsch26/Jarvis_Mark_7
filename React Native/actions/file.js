@@ -37,7 +37,7 @@ export function listDirectory_(path) {
           payload: result
         })
       }).catch((e) => {
-        console.log(e.response)
+        console.error(e.response)
       })
     }
   }

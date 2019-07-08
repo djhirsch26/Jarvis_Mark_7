@@ -30,6 +30,11 @@ target 'Jarvis' do
 
   pod 'NMSSH', '2.2.8'
 
+
+  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
+
+  pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
+
 end
 
 target 'Jarvis-tvOS' do

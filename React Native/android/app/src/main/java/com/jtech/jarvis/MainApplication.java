@@ -3,6 +3,9 @@ package com.jtech.jarvis;
 import android.support.multidex.MultiDexApplication;
 
 import com.facebook.react.ReactApplication;
+import com.RNFetchBlob.RNFetchBlobPackage;
+import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
+import io.invertase.firebase.RNFirebasePackage;
 import com.reactlibrary.RNSshClientPackage;
 import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
@@ -43,6 +46,9 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new RNFetchBlobPackage(),
+            new RNGestureHandlerPackage(),
+            new RNFirebasePackage(),
             new RNSshClientPackage(),
             new VectorIconsPackage(),
         new RNFirebasePackage(),

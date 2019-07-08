@@ -20,7 +20,8 @@ function connect(req, res, next) {
   });
 
   global.SFTP = {
-    ls: (pathname='/') => sftp.list(pathname)
+    ls: (pathname='/') => sftp.list(pathname),
+    fetch: (pathname) => sftp.get(pathname),
   }
 }
 
