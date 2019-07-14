@@ -33,15 +33,40 @@ export function changeDirectory(newPath) {
 
 export function fetch(path) {
   const withToken = (token) => {
+    console.log('Making API CALL')
+    // .then((res) => {
+    //   // the temp file path
+    //   console.log('The file saved to ', res.path())
+    // })
+    //
+    // return {
+    //   type: 'nasdas',
+    //   payload: "rorar",
+    // }
+
+
     const request = API.fetch(token, path)
     return (dispatch) => {
       request.then((result) => {
         console.log('FILE FETCHED AND SAVED?', result)
-        dispatch({
-          type: FETCH_FILE,
-          payload: {result, path}
-        })
+        const localpath = result.path()
+        console.log(localpath)
+        // RNFS.writeFile(localpath, new Buffer(result.data))
+        // .then((success) => {
+        //   console.log('File Written to ' + localpath + '!');
+          dispatch({
+            type: FETCH_FILE,
+            payload: {result, path, localpath}
+          })
+        // })
+        // .catch((err) => {
+        //   console.log('ESTA HERE')
+        //   console.log(err);
+        // });
+
+
       }).catch((e) => {
+        console.log('ESTOY MALO', e)
         console.log(e.response.data.message)
       })
     }

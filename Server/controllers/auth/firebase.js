@@ -7,7 +7,8 @@ admin.initializeApp({
 
 function verifyToken(req, res, next) {
   const idToken = req.headers.authorization ? req.headers.authorization : '';
-  
+
+  console.log('AHOY MATER')
   admin.auth().verifyIdToken(idToken)
     .then(function(decodedToken) {
       let uid = decodedToken.user_id;

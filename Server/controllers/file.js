@@ -21,7 +21,13 @@ function connect(req, res, next) {
 
   global.SFTP = {
     ls: (pathname='/') => sftp.list(pathname),
-    fetch: (pathname) => sftp.get(pathname),
+    fetch: (pathname, destination) => {
+      console.log('server side');
+      const path = './tmp/' + destination.substring(1).replace(/\//g, '_');
+      // return sftp.list('/')
+      const request = sftp.get(pathname, path, {encoding: 'utf8'});
+      return request;
+    },
   }
 }
 

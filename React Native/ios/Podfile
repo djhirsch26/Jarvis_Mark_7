@@ -35,6 +35,8 @@ target 'Jarvis' do
 
   pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
 
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
 end
 
 target 'Jarvis-tvOS' do

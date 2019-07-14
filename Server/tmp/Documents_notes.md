@@ -42,7 +42,7 @@ You can see the image by running `docker image ls`
 
 To run this image run:
 ```
-$ docker run -d -p 3030:22 -v /Users/daniel/Documents/Jarvis/Jarvis_Mark_7/Docker:/home/jarvis/Documents  jarvis:latest
+$ docker run -d -p 3030:22 -v /Users/daniel/Documents/Jarvis/Jarvis_Mark_7/Docker:/home/jarvis/Documents -v /Users/daniel/Documents/Jarvis/Jarvis_Mark_7/Docker:/var/jail/Documents  jarvis:latest
 
 $ docker port jarvis 22
 
@@ -53,6 +53,7 @@ Username is jarvis, Password is jarvis.
 The -p flag is <host>:<container>
 
 
-<hr/>
-You can get rid of NMSSH
-In order to link react native fetch blob, you need to hit enter
+<br/>
+
+Stuff on chroot jail
+https://allanfeid.com/content/creating-chroot-jail-ssh-access
