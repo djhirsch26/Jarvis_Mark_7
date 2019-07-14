@@ -3,9 +3,26 @@ import axios from 'axios';
 import {
   BASE_URL,
   FILE_URL,
+  FILE_TYPE,
 } from '../constants';
 
 import RNFetchBlob from 'rn-fetch-blob'
+
+export function getType(file) {
+  var re = /(?:\.([^.]+))?$/;
+  var ext = re.exec(file)[1];
+
+  console.log(ext)
+
+  switch(ext) {
+    case 'mp3':
+    case 'mp4':
+    case 'wav':
+      return FILE_TYPE.MEDIA
+    default:
+      return FILE_TYPE.FILE
+  }
+}
 
 export const API = {
 

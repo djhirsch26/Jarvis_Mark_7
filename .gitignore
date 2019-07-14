@@ -6,3 +6,5 @@ Pods
 React\ Native\ Copy
 **/.DS_Store
 **/tmp
+.DS_Store
+*.mp3

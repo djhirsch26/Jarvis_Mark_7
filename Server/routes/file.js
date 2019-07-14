@@ -31,7 +31,7 @@ router.get('/ls', function(req, res) {
 })
 
 router.post('/fetch', function(req, res) {
-  console.log('Fetching Data at ^');
+  console.log('Fetching Data at ', req.body.path);
 
   SFTP.fetch(req.body.path, req.body.path).then((data) => {
     const readStream = fs.createReadStream(data);

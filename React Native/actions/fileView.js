@@ -1,7 +1,8 @@
 import {
   VIEW_DIR,
   REQUIRE_TOKEN,
-  FETCH_FILE
+  FETCH_FILE,
+  CLOSE_FILE
 } from '../constants'
 
 import {API} from '../utils/API';
@@ -48,21 +49,12 @@ export function fetch(path) {
     const request = API.fetch(token, path)
     return (dispatch) => {
       request.then((result) => {
-        console.log('FILE FETCHED AND SAVED?', result)
-        const localpath = result.path()
-        console.log(localpath)
-        // RNFS.writeFile(localpath, new Buffer(result.data))
-        // .then((success) => {
-        //   console.log('File Written to ' + localpath + '!');
-          dispatch({
-            type: FETCH_FILE,
-            payload: {result, path, localpath}
-          })
-        // })
-        // .catch((err) => {
-        //   console.log('ESTA HERE')
-        //   console.log(err);
-        // });
+        const path = result.path()
+
+        dispatch({
+          type: FETCH_FILE,
+          payload: {path: path}
+        })
 
 
       }).catch((e) => {
@@ -75,5 +67,12 @@ export function fetch(path) {
   return {
     type: REQUIRE_TOKEN,
     payload: withToken,
+  }
+}
+
+export function closeFile() {
+  return {
+    type: CLOSE_FILE,
+    payload: {}
   }
 }

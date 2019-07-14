@@ -5,11 +5,18 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 import { Toolbar, Button, COLOR } from 'react-native-material-ui';
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
+import FileViewer from 'react-native-file-viewer';
+import Video from 'react-native-video';
+import RNFetchBlob from 'rn-fetch-blob';
+
+import {getType} from '../../utils/API';
+import {FILE_TYPE} from '../../constants'
 
 import {
   listDirectory,
   changeDirectory,
-  fetch
+  fetch,
+  closeFile
 } from '../../actions'
 
 const FOLDER = 'folder'
@@ -86,8 +93,57 @@ class FileView extends React.Component {
     )
   }
 
+  onBuffer(data) {
+    console.log('buffering', data)
+  }
+
+  videoError(e) {
+    console.log('Video error', e)
+  }
+
+  onDismiss(data) {
+    console.log('dismiss', data)
+    this.props.closeFile();
+  }
+
   render() {
     const { currentUser } = this.state
+
+    if (this.props.queuedFile) {
+      const path = this.props.path;
+      // const path = '/Users/daniel/Library/Developer/CoreSimulator/Devices/6AB44373-02DE-4176-9DAF-E7406A8BF780/data/Containers/Data/Application/0653B07D-1168-4818-81BF-F489277B9DC7/Documents/Documents/ClippedWake2.mp3'
+      // const type = getType(this.props.path)
+      // console.log('FILE QUEUED of type ' + type + ' from ' + path)
+      // switch(type) {
+      //   case FILE_TYPE.MEDIA:
+      //     return (
+      //       <View style={styles.container}>
+      //         <Text>HELLO FRIEND</Text>
+      //         <Video source={{uri: 'file://' + path}}   // Can be a URL or a local file.
+      //          ref={(ref) => {
+      //            this.player = ref
+      //          }}                                      // Store reference
+      //          onBuffer={this.onBuffer}                // Callback when remote video is buffering
+      //          onError={this.videoError}               // Callback when video cannot be loaded
+      //         />
+      //       </View>
+      //     )
+      //     break;
+      //   case FILE_TYPE.FILE:
+      //   default:
+          FileViewer.open(path, {
+            onDismiss: this.onDismiss.bind(this)
+          })
+          .then(() => {
+            console.log('succesfully opened: ' + path)
+          })
+          .catch(error => {
+            console.log('could not open: ' + path)
+          });
+        // }
+        // return (<View/>)
+    }
+
     var listData = this.props.contents ? this.props.contents : [];
     if (listData.length > 0 && this.props.pwd != ROOT) {
       listData= [{
@@ -135,6 +191,7 @@ function mapDispatchToProps(dispatch) {
     listDirectory,
     changeDirectory,
     fetch,
+    closeFile,
   }, dispatch);
 }
 

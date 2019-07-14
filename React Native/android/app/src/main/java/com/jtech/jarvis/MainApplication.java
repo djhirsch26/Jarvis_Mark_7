@@ -3,6 +3,8 @@ package com.jtech.jarvis;
 import android.support.multidex.MultiDexApplication;
 
 import com.facebook.react.ReactApplication;
+import com.brentvatne.react.ReactVideoPackage;
+import com.vinzscam.reactnativefileviewer.RNFileViewerPackage;
 import com.rnfs.RNFSPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
@@ -48,6 +50,8 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
+            new ReactVideoPackage(),
+            new RNFileViewerPackage(),
             new RNFSPackage(),
             new RNFetchBlobPackage(),
             new RNFetchBlobPackage(),

@@ -1,11 +1,14 @@
 import {
   VIEW_DIR,
   FETCH_FILE,
+  CLOSE_FILE
 } from '../constants';
 
 var initialState = {
   pwd: '/',
-  contents: []
+  contents: [],
+  queuedFile: false,
+  path: undefined,
 }
 
 export default function(state=initialState, action) {
@@ -13,7 +16,9 @@ export default function(state=initialState, action) {
   case VIEW_DIR:
     return {...state, contents: action.payload.result.data, pwd: action.payload.path};
   case FETCH_FILE:
-    return {...state}
+    return {...state, queuedFile: true, path: action.payload.path}
+  case CLOSE_FILE:
+    return {...state, queuedFile: false}
   default:
 		return state;
 	}
