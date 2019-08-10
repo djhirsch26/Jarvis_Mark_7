@@ -19,7 +19,8 @@ export default class Home extends React.Component {
 
     return (
       <View style={styles.container}>
-        <Toolbar style={styles.header}
+        <Toolbar
+          style={{container: styles.toolbar}}
           onLeftElementPress={() => console.log("BACK")}
           centerElement="Jarvis"
         />
@@ -41,9 +42,10 @@ const styles = StyleSheet.create({
     flex: 1,
     alignItems: 'center'
   },
-  header: {
-    justifyContent: 'flex-start',
-    textAlign: 'center',
+  toolbar: {
+    paddingTop: 25,
+    paddingBottom: 10,
+    backgroundColor: '#2196F3',
   },
   body: {
     flex: 1,

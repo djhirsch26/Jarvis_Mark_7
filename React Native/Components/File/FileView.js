@@ -1,5 +1,5 @@
 import React from 'react'
-import { StyleSheet, Platform, Image, Text, View, Header, FlatList, ScrollView, TouchableOpacity } from 'react-native'
+import { StyleSheet, Platform, Image, Text, View, Header, FlatList, ScrollView, TouchableOpacity, StatusBar} from 'react-native'
 import firebase from 'react-native-firebase'
 import Icon from 'react-native-vector-icons/FontAwesome';
 import { Toolbar, Button, COLOR } from 'react-native-material-ui';
@@ -10,7 +10,10 @@ import Video from 'react-native-video';
 import RNFetchBlob from 'rn-fetch-blob';
 
 import {getType} from '../../utils/API';
-import {FILE_TYPE} from '../../constants'
+import {
+  FILE_TYPE,
+  START_DIRECTORY
+} from '../../constants'
 
 import {
   listDirectory,
@@ -30,7 +33,7 @@ class FileView extends React.Component {
 
   componentDidMount() {
     const { currentUser } = firebase.auth()
-    this.props.listDirectory(ROOT)
+    this.props.listDirectory(START_DIRECTORY)
     this.setState({ currentUser })
   }
 
@@ -83,7 +86,7 @@ class FileView extends React.Component {
        onPress={this.onPress(name, type).bind(this)}
        >
       <View style={styles.listView}>
-          <Icon name={icon} size={20} color='gray' style={styles.listIcon}/>
+          <Icon name={icon} size={24} color='gray' style={styles.listIcon}/>
           <Text style={styles.listName}>
             {name}
           </Text>
@@ -109,28 +112,10 @@ class FileView extends React.Component {
   render() {
     const { currentUser } = this.state
 
+    const statusBar = this.props.queuedFile ? <StatusBar barStyle="dark-content" /> : <StatusBar barStyle="light-content" />
+
     if (this.props.queuedFile) {
       const path = this.props.path;
-      // const path = '/Users/daniel/Library/Developer/CoreSimulator/Devices/6AB44373-02DE-4176-9DAF-E7406A8BF780/data/Containers/Data/Application/0653B07D-1168-4818-81BF-F489277B9DC7/Documents/Documents/ClippedWake2.mp3'
-      // const type = getType(this.props.path)
-      // console.log('FILE QUEUED of type ' + type + ' from ' + path)
-      // switch(type) {
-      //   case FILE_TYPE.MEDIA:
-      //     return (
-      //       <View style={styles.container}>
-      //         <Text>HELLO FRIEND</Text>
-      //         <Video source={{uri: 'file://' + path}}   // Can be a URL or a local file.
-      //          ref={(ref) => {
-      //            this.player = ref
-      //          }}                                      // Store reference
-      //          onBuffer={this.onBuffer}                // Callback when remote video is buffering
-      //          onError={this.videoError}               // Callback when video cannot be loaded
-      //         />
-      //       </View>
-      //     )
-      //     break;
-      //   case FILE_TYPE.FILE:
-      //   default:
           FileViewer.open(path, {
             onDismiss: this.onDismiss.bind(this)
           })
@@ -140,38 +125,60 @@ class FileView extends React.Component {
           .catch(error => {
             console.log('could not open: ' + path)
           });
-        // }
-        // return (<View/>)
     }
 
     var listData = this.props.contents ? this.props.contents : [];
-    if (listData.length > 0 && this.props.pwd != ROOT) {
+
+    //Sort and filter
+    listData = listData.filter(file => !(file.name.charAt(0)=='.' || file.name.charAt(0)=='$'))
+    listData = listData.sort((a,b) => {
+      return a.name.localeCompare(b.name)
+    })
+
+    var rightElement = undefined;
+    if (this.props.pwd != ROOT) {
       listData= [{
         name: '..',
         type: UP_ONE
       }].concat(listData)
+      rightElement = "arrow-upward"
     }
+
+    const leftElement =
+      <ScrollView
+      horizontal
+      style={styles.flex}
+      ref={(s) => this.scrollView = s}
+      onContentSizeChange={(contentWidth, contentHeight)=>{
+        this.scrollView.scrollToEnd({animated: true});
+      }}
+      >
+          <Text style={styles.toolbarTitle}>
+          Path: {this.props.pwd}
+          </Text>
+      </ScrollView>
 
     return (
       <View style={styles.container}>
-        <Toolbar
-          leftElement="arrow-back"
-          onLeftElementPress={() => this.props.navigation.goBack()}
-          centerElement="File System"
-        />
+        {statusBar}
         <View style={styles.body}>
-          <View style={styles.header}>
-            <Text style={styles.headerText}>
-              PWD: ~{this.props.pwd}
-            </Text>
-          </View>
+          <Toolbar
+            leftElement={leftElement}
+            style={{
+              container: styles.toolbar,
+              leftElementContainer: styles.toolbarHeader,
+              centerElementContainer: styles.empty,
+            }}
+            rightElement={rightElement}
+            onRightElementPress={this.onPress("..", UP_ONE).bind(this)}
+          />
           <View style={styles.list}>
             <FlatList
             data={listData}
             renderItem={this.renderItem.bind(this)}
             keyExtractor={(item,index) => (item.name + index)}
             />
-          </View>
+        </View>
         </View>
       </View>
     )
@@ -206,15 +213,28 @@ const styles = StyleSheet.create({
     flex: 1,
     alignSelf: "stretch",
   },
-  header: {
-    paddingTop: 10,
-    paddingBottom: 10,
-    paddingLeft: 10,
-    textAlign: 'left',
-    backgroundColor: '#b9bec7'
+  flex: {
+    flex: 1
   },
-  headerText: {
-    fontSize: 20,
+  empty: {
+    flex: 0
+  },
+  toolbar: {
+    flex: .05,
+    flexDirection: 'row',
+    paddingTop: 30,
+    paddingBottom: 15,
+    backgroundColor: '#2196F3',
+  },
+  toolbarHeader: {
+    flex: 100,
+    marginLeft: 20,
+  },
+  toolbarTitle: {
+    fontSize: 24,
+    color: '#FFFFFF',
+    fontWeight: '500',
+    flex: .5,
   },
   list: {
     alignSelf: "stretch",
@@ -224,14 +244,15 @@ const styles = StyleSheet.create({
   listView: {
     flex: 1,
     width: '100%',
-    padding: 10,
+    padding: 15,
+    paddingRight: 10,
     paddingLeft: 20,
     borderBottomWidth: 1,
     borderColor: 'gray',
     flexDirection: 'row',
   },
   listName: {
-    fontSize: 18,
+    fontSize: 20,
     textAlign: 'left',
     flex: 8
   },

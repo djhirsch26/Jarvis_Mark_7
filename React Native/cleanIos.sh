@@ -10,4 +10,3 @@
 watchman watch-del-all
 npm cache clean
 rm -f /ios/build
-react-native run-ios

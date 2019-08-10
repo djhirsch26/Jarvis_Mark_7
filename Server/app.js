@@ -5,7 +5,7 @@ var router = express.Router();
 var bodyParser = require('body-parser')
 
 
-const fileServer = require('./controllers/file')
+const fileServer = require('./controllers/file').file
 fileServer.connect()
 
 app.use(bodyParser.json())

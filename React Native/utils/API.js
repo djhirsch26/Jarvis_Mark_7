@@ -43,12 +43,13 @@ export const API = {
   },
 
   fetch(uid, path) {
+    const URL = `${BASE_URL}/${FILE_URL}/fetch`
     const request = RNFetchBlob.config({
       // add this option that makes response data to be stored as a file,
       // this is much more performant.
       fileCache : true,
       path: RNFetchBlob.fs.dirs.DocumentDir + path
-    }).fetch('post', 'http://localhost:3000/file/fetch', {
+    }).fetch('post', URL, {
       authorization: `${uid}`,
       'Content-Type': 'application/json'
     }, JSON.stringify({

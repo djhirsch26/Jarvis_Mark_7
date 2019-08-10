@@ -144,6 +144,8 @@ android {
 }
 
 dependencies {
+    implementation project(':rn-spotify-sdk')
+    implementation project(':react-native-events')
     implementation project(':react-native-video')
     implementation project(':react-native-file-viewer')
     implementation project(':react-native-fs')

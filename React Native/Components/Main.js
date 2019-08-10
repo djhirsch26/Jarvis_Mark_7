@@ -7,11 +7,13 @@ import { createMaterialBottomTabNavigator } from "react-navigation-material-bott
 
 import Home from './Home/Home'
 import FileView from './File/FileView'
+import Audio from './Audio/Audio'
 import Console_ from './File/Console'
 
 
 const homeIcon = ({focused, tintColor}) => <Icon name="home" size={20} color={tintColor}/>;
 const fileIcon = ({focused, tintColor}) => <Icon name="file" size={20} color={tintColor}/>;
+const spotifyIcon = ({focused, tintColor}) => <Icon name="spotify" size={20} color={tintColor}/>;
 const consoleIcon = ({focused, tintColor}) => <Icon name="laptop" size={20} color={tintColor}/>;
 
 
@@ -19,13 +21,18 @@ export default Main = createMaterialBottomTabNavigator(
   {
     Home: {screen: Home,  navigationOptions: { title: 'Home', tabBarIcon: homeIcon}},
     FileView: {screen: FileView,  navigationOptions: { title: 'Files', tabBarIcon: fileIcon}},
+    Audio: {screen: Audio,  navigationOptions: { title: 'Audio', tabBarIcon: spotifyIcon}},
     Console_: {screen: Console_,  navigationOptions: { title: 'Console', tabBarIcon: consoleIcon}},
 
   },
   {
     initialRouteName: 'FileView',
-    activeColor: '#f0edf6',
-    inactiveColor: '#3e2465',
-    barStyle: { backgroundColor: '#694fad' },
+    activeColor: '#000000',
+    inactiveColor: '#808080',
+    barStyle: {
+      backgroundColor: '#f2f2f2',
+      borderTopWidth: 1,
+      borderColor: '#c2c2c2'
+     },
   }
 );

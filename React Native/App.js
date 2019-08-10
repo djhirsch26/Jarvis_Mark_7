@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, Image, Text, View, ScrollView } from 'react-native';
+import { StyleSheet, Platform, Image, Text, View, ScrollView, StatusBar } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import firebase from 'react-native-firebase';
@@ -32,6 +32,7 @@ export default class App extends Component {
   render() {
     return (
       <Provider store={store}>
+        <StatusBar barStyle="light-content" />
         <AppContainer />
       </Provider>
     );

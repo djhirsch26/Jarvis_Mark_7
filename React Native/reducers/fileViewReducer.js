@@ -1,11 +1,12 @@
 import {
   VIEW_DIR,
   FETCH_FILE,
-  CLOSE_FILE
+  CLOSE_FILE,
+  START_DIRECTORY
 } from '../constants';
 
 var initialState = {
-  pwd: '/',
+  pwd: START_DIRECTORY,
   contents: [],
   queuedFile: false,
   path: undefined,

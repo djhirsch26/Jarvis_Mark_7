@@ -39,6 +39,11 @@ target 'Jarvis' do
 
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
+  pod 'RNEventEmitter', :path => '../node_modules/react-native-events'
+
+
+  pod 'RNSpotify', :path => '../node_modules/rn-spotify-sdk'
+
 end
 
 target 'Jarvis-tvOS' do

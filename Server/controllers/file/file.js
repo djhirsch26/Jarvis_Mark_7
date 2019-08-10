@@ -27,7 +27,7 @@ function connect(req, res, next) {
       const path = './tmp/' + destination.substring(1).replace(/\//g, '_');
 
       var encoding = 'utf8'
-      const binaryTypes = [".mp3", ".mp4", ".wav"];
+      const binaryTypes = [".mp3", ".mp4", ".wav", ".doc", ".docx", ".pdf", ".pptx", "xlsx", ".png", ".img", "jpg"];
       if (binaryTypes.includes(path_.extname(destination))) {
         encoding = null;
         console.log('Fetching Audio')

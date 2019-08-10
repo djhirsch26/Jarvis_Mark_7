@@ -42,9 +42,7 @@ You can see the image by running `docker image ls`
 
 To run this image run:
 ```
-$ docker run -d -p 3030:22 -v /Users/daniel/Documents/Jarvis/Jarvis_Mark_7/Docker:/home/jarvis/Documents -v /Users/daniel/Documents/Jarvis/Jarvis_Mark_7/Docker:/var/jail/Documents  jarvis:latest
-
-$ docker port jarvis 22
+$ docker run -d -p 3030:22 -v /Users/daniel/Documents/Jarvis/Jarvis_Mark_7/Docker:/home/jarvis/Documents -v /Users/daniel/Documents:/var/jail/Documents  jarvis:latest
 
 $ ssh root@localhost -p <PORT>
 ```

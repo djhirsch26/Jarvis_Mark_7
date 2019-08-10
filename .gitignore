@@ -8,3 +8,5 @@ React\ Native\ Copy
 **/tmp
 .DS_Store
 *.mp3
+**/ngrok
+
