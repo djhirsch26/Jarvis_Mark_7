@@ -45,6 +45,10 @@ To run this image run:
 $ docker run -d -p 3030:22 -v /Users/daniel/Documents/Jarvis/Jarvis_Mark_7/Docker:/home/jarvis/Documents -v /Users/daniel/Documents:/var/jail/Documents  jarvis:latest
 
 $ ssh root@localhost -p <PORT>
+
+where port is 3030
+or
+$ ssh jarvis@localhost -p 3030
 ```
 
 Username is jarvis, Password is jarvis.

@@ -16,7 +16,15 @@ router.get('/test', function(req, res) {
   res.send('Test Spotify Command')
 })
 
-router.get('/refresh', function(req, res) {
+router.get('/redirect', function(req, res) {
+  // console.log(req,res)
+  res.send('Test Spotify Redirect')
+})
+
+router.post('/refresh', function(req, res) {
+
+  console.log("Refresh Called")
+
   // ensure refresh token parameter
 	if (!req.body.refresh_token) {
 		res.status(400).json({error: 'Refresh token is missing from body'});
@@ -24,6 +32,20 @@ router.get('/refresh', function(req, res) {
 	}
 
   const request = Spotify.refresh(req.body.refresh_token)
+
+  //SEND REQUEST
+  request.then((result) => {
+    res.json(result.data);
+  }).catch((e) => {
+    console.log(e)
+    res.send(e)
+  });
+})
+
+router.post('/swap', function(req, res) {
+
+  console.log("Swap Called")
+  const request = Spotify.swap(req.body.code)
 
   //SEND REQUEST
   request.then((result) => {

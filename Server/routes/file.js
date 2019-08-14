@@ -21,7 +21,7 @@ router.get('/test', function(req, res) {
 router.get('/ls', function(req, res) {
   console.log(req.query.path)
   SFTP.ls(req.query.path).then((data) => {
-    console.log(data)
+    // console.log(data)
     res.send(data)
   }).catch(err => {
     console.log(err)

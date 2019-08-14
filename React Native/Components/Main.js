@@ -26,7 +26,7 @@ export default Main = createMaterialBottomTabNavigator(
 
   },
   {
-    initialRouteName: 'FileView',
+    initialRouteName: 'Audio',
     activeColor: '#000000',
     inactiveColor: '#808080',
     barStyle: {
