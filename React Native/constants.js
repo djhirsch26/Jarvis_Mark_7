@@ -3,8 +3,12 @@ export const TEST_AUTH = 'test-auth'
 export const SET_USER_DATA = 'set-user-data'
 export const SET_USER_TOKEN = 'set-user-token'
 export const REQUIRE_TOKEN = 'require-token'
+
+// Audio Actions
 export const UPDATE_TRACKS = 'update-tracks'
 export const SET_IS_PLAYING = 'set-is-playing'
+export const UPDATE_TRACK_INFO = 'update-track-info'
+export const UPDATE_PLAYER_INFO = 'update-player-info'
 
 // File Viewer actions
 export const VIEW_DIR = 'view-dir'

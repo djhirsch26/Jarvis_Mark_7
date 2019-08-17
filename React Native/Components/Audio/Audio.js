@@ -12,14 +12,13 @@ import SpotifyController from './SpotifyController'
 
 import {
   updateTracks,
-  setIsPlaying
+  setIsPlaying,
+  updateTrackInfo,
+  updatePlayerInfo
 } from '../../actions'
 
 
 class Audio extends React.Component {
-  state = {
-    isPlaying: false,
-  }
 
   constructor() {
     super();
@@ -29,8 +28,10 @@ class Audio extends React.Component {
   componentDidMount() {
     /** Initialize Audio Event Behaviors */
     this.audioEvents.on('update_tracks', (tracks) => {
-      console.log("Update Tracks", tracks)
-      this.props.updateTracks(tracks)
+      this.props.updateTracks(tracks.map((track, index) => {
+        track.index = index
+        return track;
+      }))
     })
 
     this.audioEvents.on('play', () => {
@@ -43,11 +44,16 @@ class Audio extends React.Component {
       this.props.setIsPlaying(false);
     })
 
+    this.audioEvents.on('track_change', (trackInfo, playerInfo) => {
+      console.log('Track Changed', trackInfo)
+      this.props.updateTrackInfo(trackInfo)
+      this.props.updatePlayerInfo(playerInfo)
+    })
+
 
     /**************/
     this.spotifyController = new SpotifyController(this.audioEvents);
     this.currentController = this.spotifyController;
-    console.log(this.spotifyController)
 
   }
 
@@ -66,9 +72,16 @@ class Audio extends React.Component {
     }
   }
 
+  onNext() {
+    this.currentController.onNext()
+  }
+
+  onPrev() {
+    this.currentController.onPrev()
+  }
+
   onTrackPress(item) {
     return () => {
-      console.log("Pressed Item", item)
       this.currentController.onTrackSelect(item)
     }
   }
@@ -108,13 +121,27 @@ class Audio extends React.Component {
             title="Play/Pause"
             color="#841584"
           />
+          <Button
+            onPress={this.onNext.bind(this)}
+            title="Next"
+            color="#841584"
+          />
+          <Button
+            onPress={this.onPrev.bind(this)}
+            title="Prev"
+            color="#841584"
+          />
         </View>
         <View style={styles.tracks}>
-          <Text> Tracks </Text>
+          <View style={styles.trackTitleWrapper}>
+            <Text style={styles.tracksTitle}> Tracks </Text>
+          </View>
           <FlatList
             data={this.props.tracks}
             renderItem={this.renderTrack.bind(this)}
-            keyExtractor={(item) => (item.track.id)}
+            keyExtractor={(item) => {
+              return item.track.id;
+            }}
           />
         </View>
       </View>
@@ -135,7 +162,9 @@ function mapStateToProps(state) {
 function mapDispatchToProps(dispatch) {
   return bindActionCreators({
     updateTracks,
-    setIsPlaying
+    setIsPlaying,
+    updateTrackInfo,
+    updatePlayerInfo,
   }, dispatch);
 }
 
@@ -159,6 +188,15 @@ const styles = StyleSheet.create({
   tracks: {
     flex: 1,
   },
+  trackTitleWrapper: {
+    borderBottomColor: 'gray',
+    borderBottomWidth: 1,
+    paddingBottom: 5
+  },
+  tracksTitle: {
+    fontSize: 18,
+    alignItems: 'center',
+  },
   listView: {
     flex: 1,
     width: '100%',
@@ -170,7 +208,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
   },
   listName: {
-    fontSize: 12,
+    fontSize: 16,
     flex: 8
   },
   listIcon: {

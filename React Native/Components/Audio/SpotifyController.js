@@ -18,16 +18,7 @@ class SpotifyController {
   loggedIn_ = false;
 
   constructor(audioEvents) {
-    console.log('BUILD ME UP');
     this.audioEvents = audioEvents
-    console.log({
-        clientID: CLIENT_ID,
-        redirectURL: REDIRECT_URL,
-        scopes: SCOPES,
-        tokenRefreshURL: SPOTIFY_TOKEN_REFRESH,
-        tokenSwapURL: SPOTIFY_TOKEN_SWAP,
-    })
-
     var request = Spotify.initialize({
         clientID: CLIENT_ID,
         redirectURL: REDIRECT_URL,
@@ -59,12 +50,32 @@ class SpotifyController {
 
     Spotify.addListener('login', (data) => {
       // console.log('Login Event', data)
-      const request = this.getTracks('1TIzQuYM2bG6X6giwGaISF')
+      const playlist = '1TIzQuYM2bG6X6giwGaISF'
+      const request = this.getTracks(playlist)
       request.then((tracks) => {
+        tracks = tracks.map(track => {
+          track.playlist = playlist
+          return track;
+        })
         this.audioEvents.emit('update_tracks', tracks)
       }).catch((e) => {
         console.log('error', e)
       })
+    })
+
+    Spotify.addListener('trackChange', (data) => {
+      const trackInfo = {
+        name: data.metadata.currentTrack.name,
+        index: data.metadata.currentTrack.indexInContext,
+        duration: data.metadata.currentTrack.duration,
+      }
+      const playerInfo = {
+        playing: data.state.playing,
+        position: data.state.position,
+        repeating: data.state.repeating,
+        shuffling: data.state.shuffling,
+      }
+      this.audioEvents.emit('track_change', trackInfo, playerInfo)
     })
 
   }
@@ -74,10 +85,8 @@ class SpotifyController {
   }
 
   getTracksInternal_(playlist_id, resolve, reject, limit=100, offset=0, items=[]) {
-    console.log("URL", 'v1/playlists/' + playlist_id + '/tracks')
     const request = Spotify.sendRequest('v1/playlists/' + playlist_id + '/tracks', 'GET', {limit, offset}, false)
     request.then((tracks) => {
-      console.log("Tracks", tracks)
       items = items.concat(tracks.items)
       if (tracks.offset + tracks.limit < tracks.total) {
         this.getTracksInternal_(playlist_id, resolve, reject, limit, tracks.offset + limit, items)
@@ -95,14 +104,6 @@ class SpotifyController {
       this.getTracksInternal_(playlist_id, resolve, reject)
     });
 
-
-
-    // promise.then((tracks) => {
-    //   console.log("I DID IT", tracks)
-    // }).catch((e) => {
-    //   console.log("Failed to do it", e)
-    // })
-
     return promise;
   }
 
@@ -113,15 +114,13 @@ class SpotifyController {
   resume() {
     const state = Spotify.getPlaybackStateAsync()
     state.then((state) => {
-      console.log("Playback state", state)
       if (!state.playing) {
         Spotify.setPlaying(true);
         this.audioEvents.emit('play', {})
       }
     }).catch((e) => {
-      console.log('error fetch', e)
+      console.log('Error Fetching Playback State', e)
     })
-    // console.log(state)
     return true;
   }
 
@@ -139,7 +138,47 @@ class SpotifyController {
   }
 
   onTrackSelect(track) {
+    if (track.playlist) {
+      const uri = 'spotify:playlist:' + track.playlist;
+      return this.playURI(uri, track.index, 0, track)
+    }
     return this.playURI(track.track.uri, 0, 0, track)
+  }
+
+  onNext() {
+    const request = Spotify.skipToNext();
+    request.then((data) => {
+      console.log("Next", data)
+      this.audioEvents.emit('next', {
+        data
+      })
+    }).catch((e) => {
+      console.info('Failed To Next Track', e)
+    })
+  }
+
+  onPrev() {
+    const request = Spotify.skipToPrevious();
+    request.then((data) => {
+      console.log("Previous", data)
+      this.audioEvents.emit('previous', {
+        data
+      })
+    }).catch((e) => {
+      console.info('Failed To Previous Track', e)
+    })
+  }
+
+  onSeek(position=0) {
+    const request = Spotify.seek(position);
+    request.then((data) => {
+      console.log("Seek", data)
+      this.audioEvents.emit('seek', {
+        data
+      })
+    }).catch((e) => {
+      console.info('Failed To Seek Track', e)
+    })
   }
 }
 

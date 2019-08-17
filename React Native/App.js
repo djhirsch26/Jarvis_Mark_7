@@ -27,6 +27,7 @@ const AppContainer = createAppContainer(createSwitchNavigator({
 }));
 
 const store = createStore(reducers, applyMiddleware(firebaseMiddleware, thunk));
+global.store = store
 
 export default class App extends Component {
   render() {

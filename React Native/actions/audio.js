@@ -1,6 +1,8 @@
 import {
   UPDATE_TRACKS,
-  SET_IS_PLAYING
+  SET_IS_PLAYING,
+  UPDATE_TRACK_INFO,
+  UPDATE_PLAYER_INFO,
 } from '../constants'
 
 export function updateTracks(tracks) {
@@ -14,5 +16,19 @@ export function setIsPlaying(playing) {
   return {
     type: SET_IS_PLAYING,
     payload: playing
+  }
+}
+
+export function updateTrackInfo(trackInfo) {
+  return {
+    type: UPDATE_TRACK_INFO,
+    payload: trackInfo
+  }
+}
+
+export function updatePlayerInfo(playerInfo) {
+  return {
+    type: UPDATE_PLAYER_INFO,
+    payload: playerInfo
   }
 }
