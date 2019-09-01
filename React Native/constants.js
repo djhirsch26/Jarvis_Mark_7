@@ -9,6 +9,7 @@ export const UPDATE_TRACKS = 'update-tracks'
 export const SET_IS_PLAYING = 'set-is-playing'
 export const UPDATE_TRACK_INFO = 'update-track-info'
 export const UPDATE_PLAYER_INFO = 'update-player-info'
+export const UPDATE_SHUFFLING_INFO = 'update-shuffle-info'
 
 // File Viewer actions
 export const VIEW_DIR = 'view-dir'
@@ -18,7 +19,7 @@ export const CLOSE_FILE = 'close-file'
 // SERVER ENDPOINTS
 // export const BASE_URL = 'http://localhost:3000'
 
-export const BASE_URL = 'http://61d3cdcd.ngrok.io'
+export const BASE_URL = 'http://3a470376.ngrok.io'
 export const FILE_URL = 'file'
 export const LIST_DIR = 'ls'
 export const SPOTIFY_TOKEN_REFRESH = BASE_URL + '/spotify/refresh'

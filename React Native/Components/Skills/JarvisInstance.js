@@ -4,6 +4,7 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
+import SpotifyController from '../Audio/SpotifyController'
 
 class JarvisInstance extends React.Component {
   componentDidMount() {
@@ -18,7 +19,7 @@ class JarvisInstance extends React.Component {
 
   static getInstance(store) {
     if (this.jarvis) {
-      this.jarvis.store = store
+      this.jarvis.store_ = store
       return this.jarvis
     }
     return this.makeJarvis(store)
@@ -26,10 +27,15 @@ class JarvisInstance extends React.Component {
 
   static makeJarvis(store) {
     const Jarvis = {
-      store,
+      store_: store,
       /********** EFFECTIVE API FOR JARVIS *************/
-      SpotifyPlay(uri, offset = 0) {
+      SpotifyPlay(uri, offset = 0, startTime=0) {
         console.log('playing ' + uri + ' with offset ' + offset)
+        SpotifyController.playURI(uri, offset, startTime)
+      },
+
+      SpotifyTracks(playlistURI) {
+        return SpotifyController.getTracks(playlistURI)
       },
 
       SpotifyPause() {
@@ -46,6 +52,7 @@ class JarvisInstance extends React.Component {
 
       SpotifyShuffle() {
         console.log("Spotify Shuffle")
+        SpotifyController.onShuffle(true)
       }
     }
 

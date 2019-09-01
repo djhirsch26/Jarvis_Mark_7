@@ -15,22 +15,16 @@ class SkillButton extends React.Component {
   }
 
   onPress() {
-    console.log("name", this.props.name)
-    console.log("skill", this.props.skill)
     const Jarvis = JarvisInstance.getInstance(global.store)
-    console.log(Jarvis)
     this.props.skill.action(Jarvis, {})
   }
 
   render() {
-    console.log("name", this.props.name)
-    console.log("skill", this.props.skill)
-
     return (
       <View style={styles.container}>
         <Button
         onPress={this.onPress.bind(this)}
-        text={this.props.name}/>
+        text={this.props.buttonText ? this.props.buttonText : this.props.name}/>
       </View>
     )
   }

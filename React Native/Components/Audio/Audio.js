@@ -22,38 +22,64 @@ class Audio extends React.Component {
 
   constructor() {
     super();
-    this.audioEvents = new AudioEvents();
+
+    // console.log('initialize Audio Events')
+    // /** Initialize Audio Event Behaviors */
+    // global.audioEvents.on('update_tracks', (tracks) => {
+    //   this.props.updateTracks(tracks.map((track, index) => {
+    //     track.index = index
+    //     return track;
+    //   }))
+    // })
+    //
+    // global.audioEvents.on('play', () => {
+    //   console.log('Something is playing')
+    //   this.props.setIsPlaying(true);
+    // })
+    //
+    // global.audioEvents.on('pause', () => {
+    //   console.log("something is pausing")
+    //   this.props.setIsPlaying(false);
+    // })
+    //
+    // global.audioEvents.on('track_change', (trackInfo, playerInfo) => {
+    //   console.log('Track Changed', trackInfo)
+    //   this.props.updateTrackInfo(trackInfo)
+    //   this.props.updatePlayerInfo(playerInfo)
+    // })
   }
 
   componentDidMount() {
-    /** Initialize Audio Event Behaviors */
-    this.audioEvents.on('update_tracks', (tracks) => {
-      this.props.updateTracks(tracks.map((track, index) => {
-        track.index = index
-        return track;
-      }))
-    })
-
-    this.audioEvents.on('play', () => {
-      console.log('Something is playing')
-      this.props.setIsPlaying(true);
-    })
-
-    this.audioEvents.on('pause', () => {
-      console.log("something is pausing")
-      this.props.setIsPlaying(false);
-    })
-
-    this.audioEvents.on('track_change', (trackInfo, playerInfo) => {
-      console.log('Track Changed', trackInfo)
-      this.props.updateTrackInfo(trackInfo)
-      this.props.updatePlayerInfo(playerInfo)
-    })
+    this.currentController = SpotifyController
+    // this.currentController.init()
+    // /** Initialize Audio Event Behaviors */
+    // this.audioEvents.on('update_tracks', (tracks) => {
+    //   this.props.updateTracks(tracks.map((track, index) => {
+    //     track.index = index
+    //     return track;
+    //   }))
+    // })
+    //
+    // this.audioEvents.on('play', () => {
+    //   console.log('Something is playing')
+    //   this.props.setIsPlaying(true);
+    // })
+    //
+    // this.audioEvents.on('pause', () => {
+    //   console.log("something is pausing")
+    //   this.props.setIsPlaying(false);
+    // })
+    //
+    // this.audioEvents.on('track_change', (trackInfo, playerInfo) => {
+    //   console.log('Track Changed', trackInfo)
+    //   this.props.updateTrackInfo(trackInfo)
+    //   this.props.updatePlayerInfo(playerInfo)
+    // })
 
 
     /**************/
-    this.spotifyController = new SpotifyController(this.audioEvents);
-    this.currentController = this.spotifyController;
+    // this.spotifyController = new SpotifyController(this.audioEvents);
+    // this.currentController = this.spotifyController;
 
   }
 
@@ -78,6 +104,11 @@ class Audio extends React.Component {
 
   onPrev() {
     this.currentController.onPrev()
+  }
+
+  onShuffle() {
+    console.log("shuffle", !this.props.isShuffled)
+    this.currentController.onShuffle(!this.props.isShuffled)
   }
 
   onTrackPress(item) {
@@ -131,6 +162,11 @@ class Audio extends React.Component {
             title="Prev"
             color="#841584"
           />
+          <Button
+            onPress={this.onShuffle.bind(this)}
+            title="Shuffle"
+            color="#841584"
+          />
         </View>
         <View style={styles.tracks}>
           <View style={styles.trackTitleWrapper}>
@@ -155,7 +191,8 @@ class Audio extends React.Component {
 function mapStateToProps(state) {
   return {
     tracks: state.audio.tracks,
-    isPlaying: state.audio.isPlaying,
+    isPlaying: state.audio.playerInfo.playing,
+    isShuffled: state.audio.playerInfo.shuffling,
   };
 }
 

@@ -14,6 +14,7 @@ import Loading from './Components/Auth/Loading'
 import SignUp from './Components/Auth/SignUp'
 import Login from './Components/Auth/Login'
 import Main from './Components/Main'
+import Initialize from './Components/Initialize'
 
 // create our app's navigation stack
 const AppContainer = createAppContainer(createSwitchNavigator({
@@ -34,6 +35,7 @@ export default class App extends Component {
     return (
       <Provider store={store}>
         <StatusBar barStyle="light-content" />
+        <Initialize />
         <AppContainer />
       </Provider>
     );

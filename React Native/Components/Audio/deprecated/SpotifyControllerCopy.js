@@ -17,7 +17,7 @@ class SpotifyController {
 
   loggedIn_ = false;
 
-  static init() {
+  constructor() {
     var request = Spotify.initialize({
         clientID: CLIENT_ID,
         redirectURL: REDIRECT_URL,
@@ -79,11 +79,11 @@ class SpotifyController {
 
   }
 
-  static isLoggedIn() {
+  isLoggedIn() {
     return this.loggedIn_;
   }
 
-  static getTracksInternal_(playlist_id, resolve, reject, limit=100, offset=0, items=[]) {
+  getTracksInternal_(playlist_id, resolve, reject, limit=100, offset=0, items=[]) {
     const request = Spotify.sendRequest('v1/playlists/' + playlist_id + '/tracks', 'GET', {limit, offset}, false)
     request.then((tracks) => {
       items = items.concat(tracks.items)
@@ -98,7 +98,7 @@ class SpotifyController {
     })
   }
 
-  static getTracks(playlist_id) {
+  getTracks(playlist_id) {
     const promise = new Promise((resolve, reject) => {
       this.getTracksInternal_(playlist_id, resolve, reject)
     });
@@ -106,11 +106,11 @@ class SpotifyController {
     return promise;
   }
 
-  static pause() {
+  pause() {
     return Spotify.setPlaying(false);
   }
 
-  static resume() {
+  resume() {
     const state = Spotify.getPlaybackStateAsync()
     state.then((state) => {
       if (!state.playing) {
@@ -123,7 +123,7 @@ class SpotifyController {
     return true;
   }
 
-  static playURI(spotifyURI, startIndex=0, startPosition=0, extraData={}) {
+  playURI(spotifyURI, startIndex=0, startPosition=0, extraData={}) {
     const request = Spotify.playURI(spotifyURI, startIndex, startPosition)
     request.then((success) => {
       global.audioEvents.emit('play', {
@@ -136,7 +136,7 @@ class SpotifyController {
     })
   }
 
-  static onTrackSelect(track) {
+  onTrackSelect(track) {
     if (track.playlist) {
       const uri = 'spotify:playlist:' + track.playlist;
       return this.playURI(uri, track.index, 0, track)
@@ -144,7 +144,7 @@ class SpotifyController {
     return this.playURI(track.track.uri, 0, 0, track)
   }
 
-  static onNext() {
+  onNext() {
     const request = Spotify.skipToNext();
     request.then((data) => {
       console.log("Next", data)
@@ -156,7 +156,7 @@ class SpotifyController {
     })
   }
 
-  static onPrev() {
+  onPrev() {
     const request = Spotify.skipToPrevious();
     request.then((data) => {
       console.log("Previous", data)
@@ -168,20 +168,7 @@ class SpotifyController {
     })
   }
 
-  static onShuffle(shuffle=true) {
-    const request = Spotify.setShuffling(shuffle)
-    request.then((data) => {
-      console.log("Shuffle", data)
-      global.audioEvents.emit('shuffle', {
-        data,
-        isShuffled: shuffle
-      })
-    }).catch((e) => {
-      console.info('Failed To Shuffle Tracks', e)
-    })
-  }
-
-  static onSeek(position=0) {
+  onSeek(position=0) {
     const request = Spotify.seek(position);
     request.then((data) => {
       console.log("Seek", data)
