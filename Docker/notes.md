@@ -42,7 +42,7 @@ You can see the image by running `docker image ls`
 
 To run this image run:
 ```
-$ docker run -d -p 3030:22 -v /Users/daniel/Documents/Jarvis/Jarvis_Mark_7/Docker:/home/jarvis/Documents -v /Users/daniel/Documents:/var/jail/Documents  jarvis:latest
+$ docker run -d -p 3030:22 -v /Users/daniel/Documents/Jarvis/Jarvis_Mark_7/Docker:/home/jarvis/Documents -v /Users/daniel/Documents:/var/jail/Documents -v /Users/daniel/Documents/SAFC/CoChair:/home/jarvis/GCloud/Documents/SAFC/CoChair -v /Users/daniel/Documents/SAFC/Forms:/home/jarvis/GCloud/Documents/SAFC/Forms jarvis:latest
 
 $ ssh root@localhost -p <PORT>
 
@@ -53,6 +53,9 @@ $ ssh jarvis@localhost -p 3030
 
 Username is jarvis, Password is jarvis.
 The -p flag is <host>:<container>
+
+If this is your first time running, you must manually run GCloud initialization with the following:
+`gcloud init`
 
 
 <br/>

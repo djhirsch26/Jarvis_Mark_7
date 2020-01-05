@@ -10,3 +10,4 @@ React\ Native\ Copy
 *.mp3
 **/ngrok
 React Native/android/app/google-services.json
+Credentials/*

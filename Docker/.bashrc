@@ -99,3 +99,9 @@ fi
 #if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
 #    . /etc/bash_completion
 #fi
+
+# The next line updates PATH for the Google Cloud SDK.
+if [ -f '/home/jarvis/google-cloud-sdk/path.bash.inc' ]; then . '/home/jarvis/google-cloud-sdk/path.bash.inc'; fi
+
+# The next line enables shell command completion for gcloud.
+if [ -f '/home/jarvis/google-cloud-sdk/completion.bash.inc' ]; then . '/home/jarvis/google-cloud-sdk/completion.bash.inc'; fi
