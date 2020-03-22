@@ -49,6 +49,8 @@ export function fetch(path) {
     const request = API.fetch(token, path)
     return (dispatch) => {
       request.then((result) => {
+        console.log("Recieving Result")
+        console.log(request)
         const path = result.path()
 
         dispatch({

@@ -8,6 +8,7 @@ import {connect} from 'react-redux';
 import FileViewer from 'react-native-file-viewer';
 import Video from 'react-native-video';
 import RNFetchBlob from 'rn-fetch-blob';
+import * as RNFS from 'react-native-fs';
 
 import {getType} from '../../utils/API';
 import {
@@ -116,6 +117,8 @@ class FileView extends React.Component {
 
     if (this.props.queuedFile) {
       const path = this.props.path;
+      // const path = RNFS.DocumentDirectoryPath + '/SAFC/CoChair/test.txt'
+      console.log(path)
           FileViewer.open(path, {
             onDismiss: this.onDismiss.bind(this)
           })

@@ -1,0 +1,5 @@
+# crontab -e
+SHELL=/bin/bash
+MAILTO=hirschey26@gmail.com
+
+*/15 * * * * jarvis /home/jarvis/GCloud/sync_files.sh

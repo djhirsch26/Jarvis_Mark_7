@@ -7,6 +7,7 @@ RUN apt-get update && \
       nano \
       sed \
       silversearcher-ag \
+      cron \
       curl
 
 
@@ -15,7 +16,6 @@ COPY ./chrootjail.sh /tmp
 COPY .bashrc /tmp
 RUN chmod +x /tmp/chrootjail.sh
 RUN /tmp/chrootjail.sh
-
 
 # Add Users
 RUN useradd -ms /bin/bash jarvis -p jarvis && \
@@ -36,6 +36,9 @@ RUN echo 'jarvisRemote:jarvis' | chpasswd
 
 # Add ssh keys
 ADD ./overlay/.ssh /home/jarvis/.ssh
+
+# Set up Cron
+COPY ./overlay/cron_filesync /etc/cron.d/cron_filesync
 
 # Create Google Cloud Directories
 RUN mkdir -p /home/jarvis/GCloud/
@@ -58,6 +61,11 @@ COPY ./overlay/jarvis-503c9-f7e92b67b8ee.json /home/jarvis/GCloud
 RUN ["/bin/bash", "-c", "/home/jarvis/google-cloud-sdk/bin/gcloud auth activate-service-account --key-file /home/jarvis/GCloud/jarvis-503c9-f7e92b67b8ee.json"]
 
 USER root
+
+# Set up Entrypoint
+COPY ./entrypoint.sh /usr/local/bin/entrypoint.sh
+RUN chmod +x /usr/local/bin/entrypoint.sh
+ENTRYPOINT ["/usr/local/bin/entrypoint.sh"]
 
 # We don't want/need to to run a shell on boot
 # CMD /bin/bash

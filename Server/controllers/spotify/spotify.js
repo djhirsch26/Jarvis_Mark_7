@@ -38,7 +38,6 @@ var data = {
   client_id: credentials.CLIENT_ID,
   client_secret: credentials.CLIENT_SECRET
 }
-console.log(data)
 
 const request = axios.post(SPOTIFY_GET_TOKEN, querystring.stringify(data), config)
 

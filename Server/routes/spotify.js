@@ -23,7 +23,7 @@ router.get('/redirect', function(req, res) {
 
 router.post('/refresh', function(req, res) {
 
-  console.log("Refresh Called")
+  console.log("Spotify Refresh Called")
 
   // ensure refresh token parameter
 	if (!req.body.refresh_token) {
@@ -43,8 +43,7 @@ router.post('/refresh', function(req, res) {
 })
 
 router.post('/swap', function(req, res) {
-
-  console.log("Swap Called")
+  console.log("Spotify Swap Called")
   const request = Spotify.swap(req.body.code)
 
   //SEND REQUEST

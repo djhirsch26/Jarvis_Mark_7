@@ -35,14 +35,14 @@ target 'Jarvis' do
 
   pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
 
-  pod 'RNFS', :path => '../node_modules/react-native-fs'
-
   pod 'react-native-video', :path => '../node_modules/react-native-video'
 
   pod 'RNEventEmitter', :path => '../node_modules/react-native-events'
 
 
   pod 'RNSpotify', :path => '../node_modules/rn-spotify-sdk'
+
+  pod 'RNFS', :path => '../node_modules/react-native-fs'
 
 end
 

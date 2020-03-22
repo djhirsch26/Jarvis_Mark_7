@@ -16,6 +16,7 @@ class SkillButton extends React.Component {
 
   onPress() {
     const Jarvis = JarvisInstance.getInstance(global.store)
+    console.log("WOAOAOAOAO")
     this.props.skill.action(Jarvis, {})
   }
 

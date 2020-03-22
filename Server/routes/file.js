@@ -6,6 +6,8 @@ const Readable = require('stream').Readable;
 const fs = require('fs');
 const auth = require('../controllers/auth')
 
+// FileServer is a global constant defined in controllers/file/file.js
+
 // Do Firebase Authentication before doing anything
 // router.use(auth.firebase.verifyToken)
 
@@ -19,9 +21,8 @@ router.get('/test', function(req, res) {
 })
 
 router.get('/ls', function(req, res) {
-  console.log(req.query.path)
-  SFTP.ls(req.query.path).then((data) => {
-    // console.log(data)
+  FileServer.ls(req.query.path).then((data) => {
+    console.log(data)
     res.send(data)
   }).catch(err => {
     console.log(err)
@@ -34,19 +35,15 @@ router.get('/ls', function(req, res) {
 router.post('/fetch', function(req, res) {
   console.log('Fetching Data at ', req.body.path);
 
-  SFTP.fetch(req.body.path, req.body.path).then((data) => {
-    const readStream = fs.createReadStream(data);
-    readStream.on('open', function () {
-      readStream.pipe(res);
-    });
-    readStream.on('error', function(err) {
-      console.log(error)
-      res.end(err);
-    });
+  FileServer.fetch(req.body.path).then((data) => {
+    const readStream = data;
+    console.log(readStream)
+    readStream.pipe(res);
 
     // res.send('MAWHAAHAH\n')
   }).catch((error) => {
     console.log(error);
+    res.end(error);
   })
     // res.writeHead(200, {
     //     'Content-Type': mimetype,

@@ -1,14 +1,8 @@
 var admin = require('firebase-admin');
 
-admin.initializeApp({
-  credential: admin.credential.applicationDefault(),
-  databaseURL: 'https://jarvis-503c9.firebaseio.com/'
-});
-
 function verifyToken(req, res, next) {
   const idToken = req.headers.authorization ? req.headers.authorization : '';
 
-  console.log('AHOY MATER')
   admin.auth().verifyIdToken(idToken)
     .then(function(decodedToken) {
       let uid = decodedToken.user_id;

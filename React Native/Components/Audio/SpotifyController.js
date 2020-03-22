@@ -3,13 +3,13 @@ import Spotify from 'rn-spotify-sdk';
 import {
   CLIENT_ID,
   CLIENT_SECRET,
-  REDIRECT_URL,
   SCOPES
 } from './private/spotify'
 
 import {
   SPOTIFY_TOKEN_REFRESH,
   SPOTIFY_TOKEN_SWAP,
+  SPOTIFY_REDIRECT_URL,
 } from '../../constants'
 
 
@@ -18,9 +18,10 @@ class SpotifyController {
   loggedIn_ = false;
 
   static init() {
+    console.log(CLIENT_ID, SPOTIFY_REDIRECT_URL, SCOPES,SPOTIFY_TOKEN_REFRESH ,SPOTIFY_TOKEN_SWAP)
     var request = Spotify.initialize({
         clientID: CLIENT_ID,
-        redirectURL: REDIRECT_URL,
+        redirectURL: SPOTIFY_REDIRECT_URL,
         scopes: SCOPES,
         tokenRefreshURL: SPOTIFY_TOKEN_REFRESH,
         tokenSwapURL: SPOTIFY_TOKEN_SWAP,

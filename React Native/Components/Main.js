@@ -31,7 +31,7 @@ export default Main = createMaterialBottomTabNavigator(
     Console_: {screen: Console_,  navigationOptions: { title: 'Console', tabBarIcon: consoleIcon}},
   },
   {
-    initialRouteName: 'Home',
+    initialRouteName: 'FileView',
     activeColor: '#000000',
     inactiveColor: '#808080',
     barStyle: {
