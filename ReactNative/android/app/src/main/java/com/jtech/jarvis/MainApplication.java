@@ -3,17 +3,7 @@ package com.jtech.jarvis;
 import android.support.multidex.MultiDexApplication;
 
 import com.facebook.react.ReactApplication;
-import com.rnfs.RNFSPackage;
-import com.spotify.sdk.android.authentication.RNSpotifyPackage;
-import com.lufinkey.react.eventemitter.RNEventEmitterPackage;
-import com.brentvatne.react.ReactVideoPackage;
-import com.vinzscam.reactnativefileviewer.RNFileViewerPackage;
 import com.RNFetchBlob.RNFetchBlobPackage;
-import com.RNFetchBlob.RNFetchBlobPackage;
-import com.swmansion.gesturehandler.react.RNGestureHandlerPackage;
-import io.invertase.firebase.RNFirebasePackage;
-import com.reactlibrary.RNSshClientPackage;
-import com.oblador.vectoricons.VectorIconsPackage;
 import com.facebook.react.ReactNativeHost;
 import com.facebook.react.ReactPackage;
 import com.facebook.react.shell.MainReactPackage;
@@ -52,17 +42,7 @@ public class MainApplication extends MultiDexApplication implements ReactApplica
     protected List<ReactPackage> getPackages() {
       return Arrays.<ReactPackage>asList(
         new MainReactPackage(),
-            new RNFSPackage(),
-            new RNSpotifyPackage(),
-            new RNEventEmitterPackage(),
-            new ReactVideoPackage(),
-            new RNFileViewerPackage(),
             new RNFetchBlobPackage(),
-            new RNFetchBlobPackage(),
-            new RNGestureHandlerPackage(),
-            new RNFirebasePackage(),
-            new RNSshClientPackage(),
-            new VectorIconsPackage(),
         new RNFirebasePackage(),
         // add/remove these packages as appropriate
         new RNFirebaseAdMobPackage(),

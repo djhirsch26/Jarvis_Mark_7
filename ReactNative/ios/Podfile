@@ -25,24 +25,13 @@ target 'Jarvis' do
   pod 'Fabric', '~> 1.9.0'
   pod 'Crashlytics', '~> 3.12.0'
 
-
-  # pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
-
   pod 'NMSSH', '2.2.8'
 
 
-  pod 'RNGestureHandler', :path => '../node_modules/react-native-gesture-handler'
-
-  pod 'react-native-fetch-blob', :path => '../node_modules/react-native-fetch-blob'
-
-  pod 'react-native-video', :path => '../node_modules/react-native-video'
-
-  pod 'RNEventEmitter', :path => '../node_modules/react-native-events'
 
 
-  pod 'RNSpotify', :path => '../node_modules/rn-spotify-sdk'
 
-  pod 'RNFS', :path => '../node_modules/react-native-fs'
+
 
 end
 

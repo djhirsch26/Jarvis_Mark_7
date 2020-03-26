@@ -1,6 +1,5 @@
 import React from 'react'
 import { View } from 'react-native'
-
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
@@ -14,11 +13,19 @@ import {
   setShuffling
 } from '../../actions'
 
+import TrackPlayer from 'react-native-track-player';
+
+
 
 class AudioInit extends React.Component {
 
   constructor() {
     super();
+
+    TrackPlayer.setupPlayer().then(() => {
+        // The player is ready to be used
+        console.log('Player Ready')
+    });
 
     console.log('initialize Audio Events')
     /** Initialize Audio Event Behaviors */
@@ -48,6 +55,8 @@ class AudioInit extends React.Component {
     global.audioEvents.on('shuffle', (data) => {
       this.props.setShuffling(data.isShuffled)
     })
+
+
   }
 
   componentDidMount() {

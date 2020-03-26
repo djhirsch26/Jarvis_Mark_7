@@ -1,0 +1,56 @@
+{
+  "name": "JarvisApp",
+  "version": "6.3.4",
+  "private": true,
+  "scripts": {
+    "start": "react-native start",
+    "run:android": "react-native run-android",
+    "run:ios": "react-native run-ios --simulator=\"iPhone 7\"",
+    "build:apk": "cd android && ./gradlew assembleRelease",
+    "test": "jest",
+    "prepare": "patch-package"
+  },
+  "dependencies": {
+    "@react-native-firebase/app": "6.3.4",
+    "@react-native-firebase/auth": "^6.3.4",
+    "axios": "^0.19.2",
+    "events": "3.0.0",
+    "metro-react-native-babel-transformer": "^0.59.0",
+    "react": "16.9.0",
+    "react-native": "0.61.5",
+    "react-native-cli": "^2.0.1",
+    "react-native-events": "^1.0.15",
+    "react-native-file-viewer": "^2.0.2",
+    "react-native-gesture-handler": "^1.6.1",
+    "react-native-material-ui": "^1.30.1",
+    "react-native-paper": "^3.6.0",
+    "react-native-vector-icons": "^6.6.0",
+    "react-navigation": "^4.3.3",
+    "react-navigation-material-bottom-tabs": "^2.2.6",
+    "react-redux": "^7.2.0",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "rn-fetch-blob": "^0.12.0",
+    "rn-spotify-sdk": "^1.2.13",
+    "rxjs": "^6.5.4",
+    "rxjs-compat": "^6.5.4"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.6.2",
+    "@babel/runtime": "^7.6.2",
+    "@react-native-community/cli": "^2.9.0",
+    "@react-native-community/eslint-config": "^0.0.5",
+    "babel-jest": "^24.9.0",
+    "eslint": "^6.5.1",
+    "jest": "^24.9.0",
+    "metro-react-native-babel-preset": "^0.56.4",
+    "patch-package": "^6.1.4",
+    "react-test-renderer": "16.9.0"
+  },
+  "resolutions": {
+    "events": "3.0.0"
+  },
+  "jest": {
+    "preset": "react-native"
+  }
+}
