@@ -15,7 +15,7 @@ npm start -- --reset-cache
 To deal with module can not be null, you must manually link
 https://reactnative.dev/docs/linking-libraries-ios.html#manual-linking
 The steps are as follows:
-1. Add the projects `.xcodeproj` to your `Libraries` in xcode
+1. Add the projects `.xcodeproj` to your `Libraries` in xcode from the node modules folder
 2. Under your Project's Build Phases, click the `+` in the bottom left and add the `.a` file with the module you want to add
 
 To deal with missing font file:

@@ -6,14 +6,16 @@ Had to do with not having flex set
 
 
 
-
+To start it:
+1. `npx react-native start`
+2. `npx react-native run-ios --simulator="iPhone 7"`
 
 
 - Very often `pod update` then `pod install --repo-update` helps with some module linking issues
 Clear Pods: `rm -rf ios/Pods && rm -rf ios/build && cd ios && pod install`
 - Because of , had to run `npm install events@3.0.0`
 - To add firebase auth, `yarn add @react-native-firebase/auth && cd ios/ && pod install`
-- Had to readd fonts to vecctor icons, clear build cache and rebuild
+- Had to readd fonts to vector icons, clear build cache and rebuild
 - Some voodoo magic that resolved Events problem. Not sure?
 
 

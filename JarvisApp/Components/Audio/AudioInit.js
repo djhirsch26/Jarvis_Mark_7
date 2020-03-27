@@ -13,7 +13,7 @@ import {
   setShuffling
 } from '../../actions'
 
-// import TrackPlayer from 'react-native-track-player';
+import MusicControl from 'react-native-music-control';
 
 
 
@@ -21,11 +21,6 @@ class AudioInit extends React.Component {
 
   constructor() {
     super();
-
-    // TrackPlayer.setupPlayer().then(() => {
-    //     // The player is ready to be used
-    //     console.log('Player Ready')
-    // });
 
     console.log('initialize Audio Events')
     /** Initialize Audio Event Behaviors */
@@ -38,6 +33,29 @@ class AudioInit extends React.Component {
 
     global.audioEvents.on('play', () => {
       console.log('Something is playing')
+
+      // Basic Controls
+      MusicControl.enableControl('play', true)
+      MusicControl.enableControl('pause', true)
+      MusicControl.enableControl('stop', false)
+      MusicControl.enableControl('nextTrack', true)
+      MusicControl.enableControl('previousTrack', true)
+
+      MusicControl.setNowPlaying({
+        title: 'Billie Jean',
+        artwork: 'https://i.imgur.com/e1cpwdo.png', // URL or RN's image require()
+        artist: 'Michael Jackson',
+        album: 'Thriller',
+        genre: 'Post-disco, Rhythm and Blues, Funk, Dance-pop',
+        duration: 294, // (Seconds)
+      })
+
+      // Changes the state to paused
+      MusicControl.updatePlayback({
+        state: MusicControl.STATE_PLAYING,
+        elapsedTime: 0
+      })
+
       this.props.setIsPlaying(true);
     })
 
@@ -54,6 +72,7 @@ class AudioInit extends React.Component {
 
     global.audioEvents.on('shuffle', (data) => {
       this.props.setShuffling(data.isShuffled)
+
     })
 
 
@@ -61,6 +80,22 @@ class AudioInit extends React.Component {
 
   componentDidMount() {
     SpotifyController.init()
+
+    MusicControl.enableBackgroundMode(true);
+
+
+    MusicControl.enableControl('play', true)
+    MusicControl.enableControl('pause', true)
+    MusicControl.enableControl('stop', false)
+    MusicControl.enableControl('nextTrack', true)
+    MusicControl.enableControl('previousTrack', true)
+
+    MusicControl.on('play', () => {console.log("play remote")})
+    MusicControl.on('pause', () => {console.log("pause remote")})
+    MusicControl.on('stop', () => {console.log("Stop Remote")})
+    MusicControl.on('nextTrack', () => {console.log("Next Remote")})
+    MusicControl.on('previousTrack', () => {console.log("Prev Remote")})
+    console.log("Set Up Music Control")
   }
 
   render() {

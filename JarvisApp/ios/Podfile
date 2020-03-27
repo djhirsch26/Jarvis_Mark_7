@@ -37,8 +37,10 @@ target 'JarvisApp' do
   pod 'DoubleConversion', :podspec => '../node_modules/react-native/third-party-podspecs/DoubleConversion.podspec'
   pod 'glog', :podspec => '../node_modules/react-native/third-party-podspecs/glog.podspec'
   pod 'Folly', :podspec => '../node_modules/react-native/third-party-podspecs/Folly.podspec'
-
-  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+    
+  pod 'react-native-track-player', :path => '../node_modules/react-native-track-player'
+  
+  pod 'react-native-music-control', :path => '../node_modules/react-native-music-control'
 
   target 'JarvisAppTests' do
     inherit! :search_paths
