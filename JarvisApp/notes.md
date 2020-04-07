@@ -19,6 +19,14 @@ Clear Pods: `rm -rf ios/Pods && rm -rf ios/build && cd ios && pod install`
 - Some voodoo magic that resolved Events problem. Not sure?
 
 
+### Audio Controller Frameworks
+Controllers for Audio/Video are event based. Because controllers can be preempted by external systems (i.e. the spotify app, an incoming phone call), a strictly promise based architecture would fail. All Controllers may emit to `global.AudioEvent`. A base class `AudioInit` handles listening to controllers topics and updating according redux data flows.
+
+Therfore, the following invariant shoulds be maintained
+* The only class that may respond to `global.AudioEvents.on` is `AudioInit`
+* The only class that may emit `global.AudioEvents.emit` are `*Controller`
+
+
 
 
 

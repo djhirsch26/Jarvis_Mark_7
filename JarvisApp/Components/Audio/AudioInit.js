@@ -19,8 +19,25 @@ import MusicControl from 'react-native-music-control';
 
 class AudioInit extends React.Component {
 
-  constructor() {
-    super();
+  componentDidMount() {
+    SpotifyController.init()
+
+    MusicControl.enableBackgroundMode(true);
+    MusicControl.handleAudioInterruptions(true);
+
+    MusicControl.enableControl('play', true)
+    MusicControl.enableControl('pause', true)
+    MusicControl.enableControl('stop', false)
+    MusicControl.enableControl('nextTrack', true)
+    MusicControl.enableControl('previousTrack', true)
+
+    // Changing track position on lockscreen
+    MusicControl.enableControl('changePlaybackPosition', true)
+
+    MusicControl.enableControl('seekForward', false)
+    MusicControl.enableControl('seekBackward', false)
+    MusicControl.enableControl('skipForward', false)
+    MusicControl.enableControl('skipBackward', false)
 
     console.log('initialize Audio Events')
     /** Initialize Audio Event Behaviors */
@@ -31,41 +48,38 @@ class AudioInit extends React.Component {
       }))
     })
 
-    global.audioEvents.on('play', () => {
-      console.log('Something is playing')
-
-      // Basic Controls
-      MusicControl.enableControl('play', true)
-      MusicControl.enableControl('pause', true)
-      MusicControl.enableControl('stop', false)
-      MusicControl.enableControl('nextTrack', true)
-      MusicControl.enableControl('previousTrack', true)
-
-      MusicControl.setNowPlaying({
-        title: 'Billie Jean',
-        artwork: 'https://i.imgur.com/e1cpwdo.png', // URL or RN's image require()
-        artist: 'Michael Jackson',
-        album: 'Thriller',
-        genre: 'Post-disco, Rhythm and Blues, Funk, Dance-pop',
-        duration: 294, // (Seconds)
-      })
+    global.audioEvents.on('play', (state) => {
+      console.log('Something is playing', state)
 
       // Changes the state to paused
       MusicControl.updatePlayback({
         state: MusicControl.STATE_PLAYING,
-        elapsedTime: 0
+        elapsedTime: Math.floor(state.playerInfo.position),
       })
 
       this.props.setIsPlaying(true);
     })
 
-    global.audioEvents.on('pause', () => {
-      console.log("something is pausing")
+    global.audioEvents.on('pause', (state) => {
+      console.log("something is pausing", state)
+      // Changes the state to paused
+      MusicControl.updatePlayback({
+        state: MusicControl.STATE_PAUSED,
+        elapsedTime: Math.floor(state.playerInfo.position),
+      })
+
       this.props.setIsPlaying(false);
     })
 
     global.audioEvents.on('track_change', (trackInfo, playerInfo) => {
       console.log('Track Changed', trackInfo)
+      MusicControl.setNowPlaying({
+        title: trackInfo.name,
+        artwork: trackInfo.image, // URL or RN's image require()
+        artist: trackInfo.artist,
+        album: trackInfo.album,
+        duration: trackInfo.duration, // (Seconds)
+      })
       this.props.updateTrackInfo(trackInfo)
       this.props.updatePlayerInfo(playerInfo)
     })
@@ -74,28 +88,6 @@ class AudioInit extends React.Component {
       this.props.setShuffling(data.isShuffled)
 
     })
-
-
-  }
-
-  componentDidMount() {
-    SpotifyController.init()
-
-    MusicControl.enableBackgroundMode(true);
-
-
-    MusicControl.enableControl('play', true)
-    MusicControl.enableControl('pause', true)
-    MusicControl.enableControl('stop', false)
-    MusicControl.enableControl('nextTrack', true)
-    MusicControl.enableControl('previousTrack', true)
-
-    MusicControl.on('play', () => {console.log("play remote")})
-    MusicControl.on('pause', () => {console.log("pause remote")})
-    MusicControl.on('stop', () => {console.log("Stop Remote")})
-    MusicControl.on('nextTrack', () => {console.log("Next Remote")})
-    MusicControl.on('previousTrack', () => {console.log("Prev Remote")})
-    console.log("Set Up Music Control")
   }
 
   render() {

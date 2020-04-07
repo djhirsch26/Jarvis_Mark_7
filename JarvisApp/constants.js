@@ -28,6 +28,7 @@ export const SPOTIFY_TOKEN_REFRESH = BASE_URL + '/spotify/refresh'
 export const SPOTIFY_TOKEN_SWAP = BASE_URL + '/spotify/swap'
 // Make sure to update this value at the Spotify Developer Dashboard
 export const SPOTIFY_REDIRECT_URL = BASE_URL + '/spotify/redirect';
+export const SPOTIFY_INITAL_TRACK = '1TIzQuYM2bG6X6giwGaISF'
 
 
 // FILE VIEWER CONSTANTS

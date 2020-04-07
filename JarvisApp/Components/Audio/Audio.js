@@ -9,6 +9,8 @@ import {connect} from 'react-redux';
 import AudioEvents from './AudioEvents'
 import SpotifyController from './SpotifyController'
 
+import MusicControl from 'react-native-music-control';
+
 import {
   updateTracks,
   setIsPlaying,
@@ -25,6 +27,17 @@ class Audio extends React.Component {
 
   componentDidMount() {
     this.currentController = SpotifyController
+
+    MusicControl.on('play', () => {this.play()})
+    MusicControl.on('pause', () => {this.pause()})
+    MusicControl.on('stop', () => {console.log("Stop Remote")})
+    MusicControl.on('nextTrack', () => {this.onNext()})
+    MusicControl.on('previousTrack', () => {this.onPrev()})
+    MusicControl.on('seekForward', (x) => {console.log(x)})
+    MusicControl.on('seekBackward', (x) => {console.log(x)})
+    MusicControl.on('skipForward', (x) => {console.log(x)})
+    MusicControl.on('skipBackward', (x) => {console.log(x)})
+    MusicControl.on('changePlaybackPosition', (x) => {this.seek(parseFloat(x))})
 
     /**************/
     // this.spotifyController = new SpotifyController(this.audioEvents);
@@ -65,9 +78,20 @@ class Audio extends React.Component {
     this.currentController.onShuffle(!this.props.isShuffled)
   }
 
-  onTrackPress(item) {
+  seek(pos) {
+    const request = this.currentController.seek(pos)
+    request.then((pos) => {
+      console.log(pos)
+      MusicControl.updatePlayback({elapsedTime: Math.floor(pos)})
+    }).catch((e) => {
+        console.log(e)
+    })
+  }
+
+  onTrackPress(track) {
     return () => {
-      this.currentController.onTrackSelect(item)
+      this.currentController.playTrack(track)
+      // this.currentController.onTrackSelect(item)
     }
   }
 
@@ -90,11 +114,19 @@ class Audio extends React.Component {
   }
 
   render() {
+
+    const centerElement =
+    <View style={styles.flex}>
+        <Text style={styles.toolbarTitle}>
+        Spotify
+        </Text>
+      </View>
+
     // const AudioControls =
     return (
       <View style={styles.container}>
         <Toolbar
-          centerElement="Spotify"
+          centerElement={centerElement}
           style={{
             container: styles.toolbar,
             titleText: styles.toolbarTitle
@@ -166,9 +198,10 @@ const styles = StyleSheet.create({
     flex: 1,
   },
   toolbar: {
-    flex: .05,
-    paddingTop: 30,
-    paddingBottom: 15,
+    flex: 0.05,
+    flexDirection: 'row',
+    paddingTop: 20,
+    paddingBottom: 10,
     backgroundColor: '#2196F3',
   },
   toolbarTitle: {
@@ -176,8 +209,11 @@ const styles = StyleSheet.create({
     color: '#FFFFFF',
     fontWeight: '500',
   },
+  top: {
+    flex: 0.3
+  },
   tracks: {
-    flex: 1,
+    flex: 0.7,
   },
   trackTitleWrapper: {
     borderBottomColor: 'gray',

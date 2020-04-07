@@ -10,6 +10,7 @@ import {
   SPOTIFY_TOKEN_REFRESH,
   SPOTIFY_TOKEN_SWAP,
   SPOTIFY_REDIRECT_URL,
+  SPOTIFY_INITAL_TRACK
 } from '../../constants'
 
 
@@ -28,12 +29,10 @@ class SpotifyController {
     })
 
     request.then((loggedIn) => {
-      console.log("Successful Spotfy Init", loggedIn)
       this.loggedIn_ = loggedIn;
 
       // Log In if not already
       if (!loggedIn) {
-        console.log(SPOTIFY_REDIRECT_URL)
         const request = Spotify.login({
           showDialog: false,
           redirectURL: SPOTIFY_REDIRECT_URL,
@@ -52,7 +51,7 @@ class SpotifyController {
 
     Spotify.addListener('login', (data) => {
       // console.log('Login Event', data)
-      const playlist = '1TIzQuYM2bG6X6giwGaISF'
+      const playlist = SPOTIFY_INITAL_TRACK
       const request = this.getTracks(playlist)
       request.then((tracks) => {
         tracks = tracks.map(track => {
@@ -66,20 +65,39 @@ class SpotifyController {
     })
 
     Spotify.addListener('trackChange', (data) => {
-      const trackInfo = {
-        name: data.metadata.currentTrack.name,
-        index: data.metadata.currentTrack.indexInContext,
-        duration: data.metadata.currentTrack.duration,
-      }
-      const playerInfo = {
-        playing: data.state.playing,
-        position: data.state.position,
-        repeating: data.state.repeating,
-        shuffling: data.state.shuffling,
-      }
+      var {trackInfo, playerInfo} = this.extractSpotifyData(data)
       global.audioEvents.emit('track_change', trackInfo, playerInfo)
     })
 
+    Spotify.addListener('play', (data) => {
+      var {trackInfo, playerInfo} = this.extractSpotifyData(data)
+      global.audioEvents.emit('play', {trackInfo, playerInfo})
+    })
+
+    Spotify.addListener('pause', (data) => {
+      var {trackInfo, playerInfo} = this.extractSpotifyData(data)
+      global.audioEvents.emit('pause', {trackInfo, playerInfo})
+    })
+
+  }
+
+  static extractSpotifyData(data) {
+    const trackInfo = {
+      name: data.metadata.currentTrack.name,
+      index: data.metadata.currentTrack.indexInContext,
+      duration: data.metadata.currentTrack.duration,
+      artist: data.metadata.currentTrack.artistName,
+      album: data.metadata.currentTrack.albumName,
+      image: data.metadata.currentTrack.albumCoverArtURL,
+    }
+    const playerInfo = {
+      playing: data.state.playing,
+      position: data.state.position,
+      repeating: data.state.repeating,
+      shuffling: data.state.shuffling,
+    }
+
+    return {trackInfo, playerInfo}
   }
 
   static isLoggedIn() {
@@ -111,7 +129,6 @@ class SpotifyController {
 
   static pause() {
     Spotify.setPlaying(false).then(() => {
-        global.audioEvents.emit('pause', {})
         return true
     }).catch((e) => {
       console.log('Error Pausing Playback', e)
@@ -119,9 +136,18 @@ class SpotifyController {
     })
   }
 
+  static playTrack(track) {
+    console.log("Call To Spotify Play Track")
+    if (track.playlist) {
+      const uri = 'spotify:playlist:' + track.playlist;
+      return this.playURI(uri, track.index, 0, track)
+    }
+    return this.playURI(track.track.uri, 0, 0, track)
+  }
+
   static resume() {
+    console.log("Call To Spotify Resume Track")
     Spotify.setPlaying(true).then(() => {
-        global.audioEvents.emit('play', {})
         return true;
     }).catch((e) => {
       console.log('Error Resuming Playback', e)
@@ -130,30 +156,26 @@ class SpotifyController {
   }
 
   static playURI(spotifyURI, startIndex=0, startPosition=0, extraData={}) {
+    console.log("Call to Spotify Play URI")
     const request = Spotify.playURI(spotifyURI, startIndex, startPosition)
     request.then((success) => {
-      global.audioEvents.emit('play', {
-        uri: spotifyURI,
-        controller: 'SPOTIFY',
-        ...extraData
-      })
+      return true;
     }).catch((e) => {
       console.log("Failed To Start Spotify Track", e)
     })
   }
 
-  static onTrackSelect(track) {
-    if (track.playlist) {
-      const uri = 'spotify:playlist:' + track.playlist;
-      return this.playURI(uri, track.index, 0, track)
-    }
-    return this.playURI(track.track.uri, 0, 0, track)
-  }
+  // static onTrackSelect(track) {
+  //   if (track.playlist) {
+  //     const uri = 'spotify:playlist:' + track.playlist;
+  //     return this.playURI(uri, track.index, 0, track)
+  //   }
+  //   return this.playURI(track.track.uri, 0, 0, track)
+  // }
 
   static onNext() {
     const request = Spotify.skipToNext();
     request.then((data) => {
-      console.log("Next", data)
       global.audioEvents.emit('next', {
         data
       })
@@ -165,7 +187,6 @@ class SpotifyController {
   static onPrev() {
     const request = Spotify.skipToPrevious();
     request.then((data) => {
-      console.log("Previous", data)
       global.audioEvents.emit('previous', {
         data
       })
@@ -177,7 +198,6 @@ class SpotifyController {
   static onShuffle(shuffle=true) {
     const request = Spotify.setShuffling(shuffle)
     request.then((data) => {
-      console.log("Shuffle", shuffle)
       global.audioEvents.emit('shuffle', {
         isShuffled: shuffle
       })
@@ -186,16 +206,16 @@ class SpotifyController {
     })
   }
 
-  static onSeek(position=0) {
-    const request = Spotify.seek(position);
-    request.then((data) => {
-      console.log("Seek", data)
-      global.audioEvents.emit('seek', {
-        data
+  static seek(position=0) {
+    const request_ = new Promise((resolve, reject) => {
+      const request = Spotify.seek(position)
+      request.then(() => {
+        resolve(position)
+      }).catch((e) => {
+        reject('Failed To Seek Track: ' + e)
       })
-    }).catch((e) => {
-      console.info('Failed To Seek Track', e)
     })
+    return request_
   }
 }
 

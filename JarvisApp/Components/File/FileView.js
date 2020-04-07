@@ -128,16 +128,18 @@ class FileView extends React.Component {
       return a.name.localeCompare(b.name)
     })
 
-    var rightElement = undefined;
+    var leftElement = undefined;
+    var prefix = "Path: "
     if (this.props.pwd != ROOT) {
       listData= [{
         name: '..',
         type: UP_ONE
       }].concat(listData)
-      rightElement = "arrow-upward"
+      leftElement = "arrow-back"
+      prefix=''
     }
 
-    const leftElement =
+    const centerElement =
       <ScrollView
       horizontal
       style={styles.flex}
@@ -147,9 +149,12 @@ class FileView extends React.Component {
       }}
       >
           <Text style={styles.toolbarTitle}>
-          Path: {this.props.pwd}
+          {prefix}{this.props.pwd}
           </Text>
       </ScrollView>
+
+
+
 
     return (
       <View style={styles.container}>
@@ -159,11 +164,10 @@ class FileView extends React.Component {
             leftElement={leftElement}
             style={{
               container: styles.toolbar,
-              leftElementContainer: styles.toolbarHeader,
-              centerElementContainer: styles.empty,
+              centerElement: styles.centerElement
             }}
-            rightElement={rightElement}
-            onRightElementPress={this.onPress("..", UP_ONE).bind(this)}
+            centerElement={centerElement}
+            onLeftElementPress={this.onPress("..", UP_ONE).bind(this)}
           />
           <View style={styles.list}>
             <FlatList
@@ -213,15 +217,15 @@ const styles = StyleSheet.create({
     flex: 0
   },
   toolbar: {
-    flex: .05,
+    flex: 0.05,
     flexDirection: 'row',
-    paddingTop: 30,
-    paddingBottom: 15,
+    paddingTop: 20,
+    paddingBottom: 10,
     backgroundColor: '#2196F3',
   },
-  toolbarHeader: {
-    flex: 100,
-    marginLeft: 20,
+  centerElement: {
+    flex: 1,
+    paddingBottom: 300
   },
   toolbarTitle: {
     fontSize: 24,

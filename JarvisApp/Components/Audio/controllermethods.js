@@ -3,4 +3,5 @@ export const REQUIRED_METHODS = [
   'resume',
   'getTracks',
   'onTrackSelect',
+  'seek'
 ]
