@@ -18,6 +18,9 @@ Clear Pods: `rm -rf ios/Pods && rm -rf ios/build && cd ios && pod install`
 - Had to readd fonts to vector icons, clear build cache and rebuild
 - Some voodoo magic that resolved Events problem. Not sure?
 
+Renamed Build
+Rename the variable TEST_HOST to {app_name}.app/{app_name}
+
 
 ### Audio Controller Frameworks
 Controllers for Audio/Video are event based. Because controllers can be preempted by external systems (i.e. the spotify app, an incoming phone call), a strictly promise based architecture would fail. All Controllers may emit to `global.AudioEvent`. A base class `AudioInit` handles listening to controllers topics and updating according redux data flows.

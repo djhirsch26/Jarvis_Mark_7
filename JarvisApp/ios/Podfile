@@ -42,6 +42,8 @@ target 'JarvisApp' do
   
   pod 'react-native-music-control', :path => '../node_modules/react-native-music-control'
 
+  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+
   target 'JarvisAppTests' do
     inherit! :search_paths
     # Pods for testing

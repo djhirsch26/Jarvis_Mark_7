@@ -49,45 +49,50 @@ class AudioInit extends React.Component {
     })
 
     global.audioEvents.on('play', (state) => {
-      console.log('Something is playing', state)
+      console.log('Global Play', state.trackInfo, state.playerInfo)
+      this.updateState(state)
 
       // Changes the state to paused
       MusicControl.updatePlayback({
         state: MusicControl.STATE_PLAYING,
         elapsedTime: Math.floor(state.playerInfo.position),
       })
-
-      this.props.setIsPlaying(true);
     })
 
     global.audioEvents.on('pause', (state) => {
-      console.log("something is pausing", state)
+      console.log("Global Pause", state.trackInfo, state.playerInfo)
+      
+      this.updateState(state)
       // Changes the state to paused
+
       MusicControl.updatePlayback({
         state: MusicControl.STATE_PAUSED,
         elapsedTime: Math.floor(state.playerInfo.position),
       })
-
-      this.props.setIsPlaying(false);
     })
 
-    global.audioEvents.on('track_change', (trackInfo, playerInfo) => {
-      console.log('Track Changed', trackInfo)
+    global.audioEvents.on('track_change', (state) => {
+      console.log('Track Changed', state.trackInfo, state.playerInfo)
       MusicControl.setNowPlaying({
-        title: trackInfo.name,
-        artwork: trackInfo.image, // URL or RN's image require()
-        artist: trackInfo.artist,
-        album: trackInfo.album,
-        duration: trackInfo.duration, // (Seconds)
+        title: state.trackInfo.name,
+        artwork: state.trackInfo.image, // URL or RN's image require()
+        artist: state.trackInfo.artist,
+        album: state.trackInfo.album,
+        duration: state.trackInfo.duration, // (Seconds)
       })
-      this.props.updateTrackInfo(trackInfo)
-      this.props.updatePlayerInfo(playerInfo)
+
+      this.updateState(state)
     })
 
     global.audioEvents.on('shuffle', (data) => {
       this.props.setShuffling(data.isShuffled)
 
     })
+  }
+
+  updateState(state) {
+    this.props.updateTrackInfo(state.trackInfo)
+    this.props.updatePlayerInfo(state.playerInfo)
   }
 
   render() {

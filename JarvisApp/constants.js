@@ -4,6 +4,9 @@ export const SET_USER_DATA = 'set-user-data'
 export const SET_USER_TOKEN = 'set-user-token'
 export const REQUIRE_TOKEN = 'require-token'
 
+// Colors
+export const DEFAULT_BUTTON_COLOR = '#841584'
+
 // Audio Actions
 export const UPDATE_TRACKS = 'update-tracks'
 export const SET_IS_PLAYING = 'set-is-playing'

@@ -4,7 +4,11 @@ import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import firebase from '@react-native-firebase/app';
 import thunk from 'redux-thunk';
-import { createSwitchNavigator, createAppContainer } from 'react-navigation'
+import { createSwitchNavigator, createAppContainer } from '@react-navigation/native'
+import { NavigationContainer } from '@react-navigation/native';
+import { createStackNavigator } from '@react-navigation/stack';
+
+
 
 import reducers from './reducers'
 import firebaseMiddleware from './middleware/firebase'
@@ -17,15 +21,45 @@ import Main from './Components/Main'
 import Initialize from './Components/Initialize'
 
 // create our app's navigation stack
-const AppContainer = createAppContainer(createSwitchNavigator({
-  Loading,
-  SignUp,
-  Login,
-  Main
-},
-{
-  initialRouteName: 'Loading'
-}));
+// const AppContainer = createAppContainer(createSwitchNavigator({
+//   Loading,
+//   SignUp,
+//   Login,
+//   Main
+// },
+// {
+//   initialRouteName: 'Loading'
+// }));
+
+const Stack = createStackNavigator();
+
+
+const AppContainer = function() {
+  return <NavigationContainer>
+    <Stack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false, gestureEnabled: false }}>
+      <Stack.Screen
+        name="Loading"
+        component={Loading}
+        options={{ title: 'Loading' }}
+      />
+      <Stack.Screen
+        name="SignUp"
+        component={SignUp}
+        options={{ title: 'SignUp' }}
+      />
+      <Stack.Screen
+        name="Login"
+        component={Login}
+        options={{ title: 'Login' }}
+      />
+      <Stack.Screen
+        name="Main"
+        component={Main}
+        options={{ title: 'Main' }}
+      />
+    </Stack.Navigator>
+  </NavigationContainer>
+}
 
 const store = createStore(reducers, applyMiddleware(firebaseMiddleware, thunk));
 global.store = store

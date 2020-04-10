@@ -258,6 +258,8 @@ PODS:
   - React-jsinspector (0.61.5)
   - react-native-music-control (0.11.0):
     - React
+  - react-native-safe-area-context (0.7.3):
+    - React
   - react-native-track-player (2.0.0-rc9):
     - React
   - React-RCTActionSheet (0.61.5):
@@ -297,6 +299,8 @@ PODS:
     - ReactCommon/jscallinvoker (= 0.61.5)
   - rn-fetch-blob (0.12.0):
     - React-Core
+  - RNCMaskedView (0.1.7):
+    - React
   - RNEventEmitter (1.0.15):
     - React
   - RNFBApp (6.3.4):
@@ -310,6 +314,8 @@ PODS:
   - RNFileViewer (2.0.2):
     - React
   - RNGestureHandler (1.6.1):
+    - React
+  - RNScreens (2.4.0):
     - React
   - RNSpotify (1.2.13):
     - React
@@ -336,6 +342,7 @@ DEPENDENCIES:
   - React-jsiexecutor (from `../node_modules/react-native/ReactCommon/jsiexecutor`)
   - React-jsinspector (from `../node_modules/react-native/ReactCommon/jsinspector`)
   - react-native-music-control (from `../node_modules/react-native-music-control`)
+  - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-track-player (from `../node_modules/react-native-track-player`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
@@ -349,17 +356,19 @@ DEPENDENCIES:
   - ReactCommon/jscallinvoker (from `../node_modules/react-native/ReactCommon`)
   - ReactCommon/turbomodule/core (from `../node_modules/react-native/ReactCommon`)
   - rn-fetch-blob (from `../node_modules/rn-fetch-blob`)
+  - "RNCMaskedView (from `../node_modules/@react-native-community/masked-view`)"
   - RNEventEmitter (from `../node_modules/react-native-events`)
   - "RNFBApp (from `../node_modules/@react-native-firebase/app`)"
   - "RNFBAuth (from `../node_modules/@react-native-firebase/auth`)"
   - RNFileViewer (from `../node_modules/react-native-file-viewer`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
+  - RNScreens (from `../node_modules/react-native-screens`)
   - RNSpotify (from `../node_modules/rn-spotify-sdk`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
 
 SPEC REPOS:
-  https://github.com/cocoapods/specs.git:
+  https://github.com/CocoaPods/Specs.git:
     - boost-for-react-native
     - Firebase
     - FirebaseAnalytics
@@ -407,6 +416,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon/jsinspector"
   react-native-music-control:
     :path: "../node_modules/react-native-music-control"
+  react-native-safe-area-context:
+    :path: "../node_modules/react-native-safe-area-context"
   react-native-track-player:
     :path: "../node_modules/react-native-track-player"
   React-RCTActionSheet:
@@ -431,6 +442,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native/ReactCommon"
   rn-fetch-blob:
     :path: "../node_modules/rn-fetch-blob"
+  RNCMaskedView:
+    :path: "../node_modules/@react-native-community/masked-view"
   RNEventEmitter:
     :path: "../node_modules/react-native-events"
   RNFBApp:
@@ -441,6 +454,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-file-viewer"
   RNGestureHandler:
     :path: "../node_modules/react-native-gesture-handler"
+  RNScreens:
+    :path: "../node_modules/react-native-screens"
   RNSpotify:
     :path: "../node_modules/rn-spotify-sdk"
   RNVectorIcons:
@@ -479,6 +494,7 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-music-control: a73cc4c0af6ed9b3204649756a33078a87ed2f03
+  react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   react-native-track-player: 36e250a77705e5edc34b12020fd526511070971f
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
@@ -491,15 +507,17 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
+  RNCMaskedView: 76c40a1d41c3e2535df09246a2b5487f04de0814
   RNEventEmitter: db22b54ae7d9be0bd5725613f79a51e2bc364a93
   RNFBApp: 7d4006751de8bb5cafa2e8d2e7d94ee250df81db
   RNFBAuth: ed8b865db45f7ded9dbf535e390cba2ba672aede
   RNFileViewer: b815b353fdc08552766c6325e5b66ff52bb6b7af
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
+  RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
   RNSpotify: 56a20358ebbae1dff52a8c4b3a933a0c0bc2eaf8
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 
-PODFILE CHECKSUM: 0d7f96489b4554f17286337b312065b0f8659d98
+PODFILE CHECKSUM: ca28ba135f737bf0c8d26fce0db3c5ddc28d7523
 
-COCOAPODS: 1.7.2
+COCOAPODS: 1.9.1
