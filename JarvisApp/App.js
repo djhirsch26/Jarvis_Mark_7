@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import { StyleSheet, Platform, Image, Text, View, ScrollView, StatusBar } from 'react-native';
+import { StyleSheet, Button, Platform, Image, Text, View, ScrollView, StatusBar } from 'react-native';
 import { createStore, applyMiddleware } from 'redux';
 import { Provider, connect } from 'react-redux';
 import firebase from '@react-native-firebase/app';
@@ -8,6 +8,9 @@ import { createSwitchNavigator, createAppContainer } from '@react-navigation/nat
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
+import {suggestShortcuts} from "react-native-siri-shortcut";
+
+import {siriOpts} from './utils/siri'
 
 
 import reducers from './reducers'
@@ -34,37 +37,47 @@ import Initialize from './Components/Initialize'
 const Stack = createStackNavigator();
 
 
-const AppContainer = function() {
-  return <NavigationContainer>
-    <Stack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false, gestureEnabled: false }}>
-      <Stack.Screen
-        name="Loading"
-        component={Loading}
-        options={{ title: 'Loading' }}
-      />
-      <Stack.Screen
-        name="SignUp"
-        component={SignUp}
-        options={{ title: 'SignUp' }}
-      />
-      <Stack.Screen
-        name="Login"
-        component={Login}
-        options={{ title: 'Login' }}
-      />
-      <Stack.Screen
-        name="Main"
-        component={Main}
-        options={{ title: 'Main' }}
-      />
-    </Stack.Navigator>
-  </NavigationContainer>
+// const AppContainer = function() {
+//   return
+// }
+
+export class AppContainer extends Component {
+  render() {
+    return <NavigationContainer>
+      <Stack.Navigator initialRouteName="Loading" screenOptions={{ headerShown: false, gestureEnabled: false }}>
+        <Stack.Screen
+          name="Loading"
+          component={Loading}
+          options={{ title: 'Loading' }}
+        />
+        <Stack.Screen
+          name="SignUp"
+          component={SignUp}
+          options={{ title: 'SignUp' }}
+        />
+        <Stack.Screen
+          name="Login"
+          component={Login}
+          options={{ title: 'Login' }}
+        />
+        <Stack.Screen
+          name="Main"
+          component={Main}
+          options={{ title: 'Main' }}
+        />
+      </Stack.Navigator>
+    </NavigationContainer>
+  }
 }
 
 const store = createStore(reducers, applyMiddleware(firebaseMiddleware, thunk));
 global.store = store
 
 export default class App extends Component {
+  componentDidMount() {
+    suggestShortcuts(siriOpts)
+  }
+
   render() {
     return (
       <Provider store={store}>

@@ -34,23 +34,9 @@ export function changeDirectory(newPath) {
 
 export function fetch(path) {
   const withToken = (token) => {
-    console.log('Making API CALL')
-    // .then((res) => {
-    //   // the temp file path
-    //   console.log('The file saved to ', res.path())
-    // })
-    //
-    // return {
-    //   type: 'nasdas',
-    //   payload: "rorar",
-    // }
-
-
     const request = API.fetch(token, path)
     return (dispatch) => {
       request.then((result) => {
-        console.log("Recieving Result")
-        console.log(request)
         const path = result.path()
 
         dispatch({
@@ -60,8 +46,7 @@ export function fetch(path) {
 
 
       }).catch((e) => {
-        console.log('ESTOY MALO', e)
-        console.log(e.response.data.message)
+        console.info('ESTOY MALO', e)
       })
     }
   }

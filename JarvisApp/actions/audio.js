@@ -4,6 +4,7 @@ import {
   UPDATE_TRACK_INFO,
   UPDATE_PLAYER_INFO,
   UPDATE_SHUFFLING_INFO,
+  SEEK_TRACK,
 } from '../constants'
 
 export function updateTracks(tracks) {
@@ -16,21 +17,35 @@ export function updateTracks(tracks) {
 export function setIsPlaying(playing) {
   return {
     type: SET_IS_PLAYING,
-    payload: playing
+    payload: {playing: playing, time: new Date().getTime()}
   }
 }
 
-export function updateTrackInfo(trackInfo) {
+export function updateTrackInfo(trackInfo={}) {
   return {
     type: UPDATE_TRACK_INFO,
     payload: trackInfo
   }
 }
 
-export function updatePlayerInfo(playerInfo) {
+export function updatePlayerInfo(playerInfo={}) {
   return {
     type: UPDATE_PLAYER_INFO,
-    payload: playerInfo
+    payload: {...playerInfo, time: new Date().getTime()}
+  }
+}
+
+export function setRepeating(repeating=true) {
+  return {
+    type: UPDATE_PLAYER_INFO,
+    payload: {repeating}
+  }
+}
+
+export function seekTrack(seekInfo) {
+  return {
+    type: SEEK_TRACK,
+    payload: {...seekInfo, time: new Date().getTime()}
   }
 }
 

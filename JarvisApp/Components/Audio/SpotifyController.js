@@ -10,7 +10,8 @@ import {
   SPOTIFY_TOKEN_REFRESH,
   SPOTIFY_TOKEN_SWAP,
   SPOTIFY_REDIRECT_URL,
-  SPOTIFY_INITAL_TRACK
+  SPOTIFY_INITAL_TRACK,
+  REPEAT
 } from '../../constants'
 
 import {shuffle} from '../../utils'
@@ -30,6 +31,9 @@ class SpotifyController {
 
     this.tracks_={}
     this.tracksOriginal_={}
+    this.trackInfo_={}
+    this.playerInfo_={}
+    this.repeatDirty_=false
 
     request.then((loggedIn) => {
       this.loggedIn_ = loggedIn;
@@ -76,8 +80,18 @@ class SpotifyController {
 
     Spotify.addListener('trackChange', (data) => {
       if (data.metadata.currentTrack) {
+        if (this.trackInfo_.spotifyURI != data.metadata.currentTrack.uri) {
+          this.playerInfo_['repeating'] = data.state.repeating ? REPEAT.CONTEXT : REPEAT.OFF
+        }
         var {trackInfo, playerInfo} = this.extractSpotifyData_(data)
         global.audioEvents.emit('track_change', {trackInfo, playerInfo})
+      }
+    })
+
+    Spotify.addListener('shuffleStatusChange', (data) => {
+      if (data.metadata.currentTrack) {
+        var {trackInfo, playerInfo} = this.extractSpotifyData_(data)
+        global.audioEvents.emit('shuffle', {trackInfo, playerInfo})
       }
     })
 
@@ -88,10 +102,30 @@ class SpotifyController {
       }
     })
 
+    Spotify.addListener('trackDelivered', (data) => {
+      if (data.metadata.currentTrack) {
+        var {trackInfo, playerInfo} = this.extractSpotifyData_(data)
+        console.log({trackInfo, playerInfo}, 100)
+        // global.audioEvents.emit('play', {trackInfo, playerInfo})
+      }
+    })
+
     Spotify.addListener('pause', (data) => {
       if (data.metadata.currentTrack) {
         var {trackInfo, playerInfo} = this.extractSpotifyData_(data)
         global.audioEvents.emit('pause', {trackInfo, playerInfo})
+      }
+    })
+
+    Spotify.addListener('repeatStatusChange', (data) => {
+      if (data.metadata.currentTrack) {
+        if(!this.repeatDirty_) {
+          this.playerInfo_['repeating'] = data.state.repeating ? REPEAT.CONTEXT : REPEAT.OFF
+        } else {
+          this.repeatDirty_=false
+        }
+        var {trackInfo, playerInfo} = this.extractSpotifyData_(data)
+        global.audioEvents.emit('repeat', {trackInfo, playerInfo})
       }
     })
 
@@ -103,20 +137,24 @@ class SpotifyController {
 
   static extractSpotifyData_(data) {
     const trackInfo = {
+      ...this.trackInfo_,
       name: data.metadata.currentTrack.name,
       index: this.getTrackIndex_(data.metadata.currentTrack.uri),
       duration: data.metadata.currentTrack.duration,
       artist: data.metadata.currentTrack.artistName,
       album: data.metadata.currentTrack.albumName,
       image: data.metadata.currentTrack.albumCoverArtURL,
+      spotifyURI: data.metadata.currentTrack.uri
     }
     const playerInfo = {
+      ...this.playerInfo_,
       playing: data.state.playing,
       position: data.state.position,
-      repeating: data.state.repeating,
       shuffling: data.state.shuffling,
     }
 
+    this.trackInfo_ = trackInfo
+    this.playerInfo_ = playerInfo
     return {trackInfo, playerInfo}
   }
 
@@ -158,7 +196,6 @@ class SpotifyController {
   }
 
   static playTrack(track) {
-    console.log("Call To Spotify Play Track", track)
     if (track.playlist) {
       const uri = 'spotify:playlist:' + track.playlist;
       return this.playURI(uri, this.getTrackIndex_(track.track.uri), 0, track)
@@ -167,76 +204,51 @@ class SpotifyController {
   }
 
   static resume() {
-    console.log("Call To Spotify Resume Track")
-    Spotify.setPlaying(true).then(() => {
-        return true;
-    }).catch((e) => {
-      console.log('Error Resuming Playback', e)
-      return false;
-    })
+    Spotify.setPlaying(true)
   }
 
   static playURI(spotifyURI, startIndex=0, startPosition=0, extraData={}) {
-    console.log("Call to Spotify Play URI")
-    const request = Spotify.playURI(spotifyURI, startIndex, startPosition)
-    request.then((success) => {
-      return true;
-    }).catch((e) => {
-      console.log("Failed To Start Spotify Track", e)
-    })
+    Spotify.playURI(spotifyURI, startIndex, startPosition)
   }
 
-  // static onTrackSelect(track) {
-  //   if (track.playlist) {
-  //     const uri = 'spotify:playlist:' + track.playlist;
-  //     return this.playURI(uri, track.index, 0, track)
-  //   }
-  //   return this.playURI(track.track.uri, 0, 0, track)
-  // }
-
   static onNext() {
-    const request = Spotify.skipToNext();
-    request.then((data) => {
-      global.audioEvents.emit('next', {
-        data
-      })
-    }).catch((e) => {
-      console.info('Failed To Next Track', e)
-    })
+    Spotify.skipToNext();
   }
 
   static onPrev() {
-    const request = Spotify.skipToPrevious();
-    request.then((data) => {
-      global.audioEvents.emit('previous', {
-        data
-      })
-    }).catch((e) => {
-      console.info('Failed To Previous Track', e)
-    })
+    Spotify.skipToPrevious()
   }
 
   static onShuffle(shuffle=true) {
-    const request = Spotify.setShuffling(shuffle)
-    request.then((data) => {
-      global.audioEvents.emit('shuffle', {
-        isShuffled: shuffle
+    Spotify.setShuffling(shuffle).then(() => {
+      this.repeatDirty_ = true
+    })
+  }
+
+  static setRepeating(repeat="context") {
+    Spotify.setRepeating(repeat).then(() => {
+      this.playerInfo_['repeating'] = repeat
+      this.repeatDirty_ = true
+      global.audioEvents.emit('repeat', {
+        playerInfo: {repeating: repeat}
       })
+      return true
     }).catch((e) => {
-      console.info('Failed To Shuffle Tracks', e)
+      console.log('Error Pausing Playback', e)
+      return false
     })
   }
 
   static seek(position=0) {
-    const request_ = new Promise((resolve, reject) => {
-      const request = Spotify.seek(position)
-      request.then(() => {
-        resolve(position)
-      }).catch((e) => {
-        reject('Failed To Seek Track: ' + e)
+    const request = Spotify.seek(position)
+    request.then(() => {
+      this.playerInfo_['position'] = position
+      global.audioEvents.emit('seek', {
+        playerInfo: {position}
       })
+    }).catch((e) => {
+      console.info('Failed To Seek Track: ' + e)
     })
-    return request_
   }
 }
 

@@ -10,21 +10,26 @@ import AudioEvents from './AudioEvents'
 import SpotifyController from './SpotifyController'
 
 import MusicControl from 'react-native-music-control';
+
 import TrackInfo from './TrackInfo'
+import {getPlayerPosition} from './util'
 
 import {
   updateTracks,
   setIsPlaying,
   updateTrackInfo,
-  updatePlayerInfo
+  updatePlayerInfo,
+  seekTrack,
 } from '../../actions'
 
 import {
-  DEFAULT_BUTTON_COLOR as DEFAULT_BUTTON_COLOR_
+  DEFAULT_BUTTON_COLOR as DEFAULT_BUTTON_COLOR_,
+  REPEAT,
 } from '../../constants'
 
 const TRACK_SELECTED_COLOR = '#F4DCFF'
 const DEFAULT_BUTTON_COLOR = DEFAULT_BUTTON_COLOR_
+const RESTART_PERCENT = 0.02
 
 class Audio extends React.Component {
 
@@ -39,7 +44,9 @@ class Audio extends React.Component {
     global.audioEvents.on('request_pause', () => this.pause())
     global.audioEvents.on('request_next', () => this.onNext())
     global.audioEvents.on('request_prev', () => this.onPrev())
+    global.audioEvents.on('request_shuffle', () => this.onShuffle())
     global.audioEvents.on('request_seek', (x) => {this.seek(parseFloat(x))})
+    global.audioEvents.on('request_repeat', () => this.onRepeat())
 
     MusicControl.on('play', () => {global.audioEvents.emit('request_play')})
     MusicControl.on('pause', () => {global.audioEvents.emit('request_pause')})
@@ -81,7 +88,12 @@ MusicControl.enableControl('remoteVolume', true)
   }
 
   onPrev() {
-    this.currentController.onPrev()
+    const poseInformation = getPlayerPosition(this.props.playerInfo, this.props.trackInfo)
+    if (poseInformation.percent < RESTART_PERCENT) {
+      this.currentController.onPrev()
+    } else {
+      this.currentController.seek(0)
+    }
   }
 
   onShuffle() {
@@ -89,12 +101,22 @@ MusicControl.enableControl('remoteVolume', true)
   }
 
   seek(pos) {
-    const request = this.currentController.seek(pos)
-    request.then((pos) => {
-      MusicControl.updatePlayback({elapsedTime: Math.floor(pos)})
-    }).catch((e) => {
-        console.log(e)
-    })
+    this.currentController.seek(pos)
+  }
+
+  onRepeat() {
+    console.log("REPEAT MODE: ", this.props.repeatMode)
+    switch(this.props.repeatMode) {
+      case REPEAT.OFF:
+        this.currentController.setRepeating(REPEAT.CONTEXT)
+        break;
+      case REPEAT.CONTEXT:
+        this.currentController.setRepeating(REPEAT.TRACK)
+        break;
+      case REPEAT.TRACK:
+        this.currentController.setRepeating(REPEAT.OFF)
+        break;
+    }
   }
 
   onTrackPress(track) {
@@ -136,18 +158,20 @@ MusicControl.enableControl('remoteVolume', true)
       return <View style={{flex: 0}}/>
     }
 
-    const currentTrack = <View style={styles.controls}>
-      <TrackInfo
-      trackInfo={this.props.trackInfo}
-      onPrev={this.onPrev.bind(this)}
-      onNext={this.onNext.bind(this)}
-      onPlay={this.play.bind(this)}
-      onPause={this.pause.bind(this)}
-      onShuffle={this.onShuffle.bind(this)}
-      isPlaying={this.props.isPlaying}
-      isShuffled={this.props.isShuffled}
-      />
-    </View>
+    // const currentTrack = <View style={styles.controls}>
+    //   <TrackInfo
+    //   trackInfo={this.props.trackInfo}
+    //   onPrev={this.onPrev.bind(this)}
+    //   onNext={this.onNext.bind(this)}
+    //   onPlay={this.play.bind(this)}
+    //   onPause={this.pause.bind(this)}
+    //   onShuffle={this.onShuffle.bind(this)}
+    //   isPlaying={this.props.isPlaying}
+    //   isShuffled={this.props.isShuffled}
+    //   />
+    // </View>
+
+    const currentTrack = <View/>
 
     return currentTrack
   }
@@ -166,6 +190,7 @@ MusicControl.enableControl('remoteVolume', true)
     // const AudioControls =
     return (
       <View style={styles.container}>
+
         <Toolbar
           centerElement={centerElement}
           style={{
@@ -203,7 +228,9 @@ function mapStateToProps(state) {
     tracks: state.audio.tracks,
     isPlaying: state.audio.playerInfo.playing,
     isShuffled: state.audio.playerInfo.shuffling,
+    repeatMode: state.audio.playerInfo.repeating,
     trackInfo: state.audio.trackInfo,
+    playerInfo: state.audio.playerInfo,
   };
 }
 
@@ -213,6 +240,7 @@ function mapDispatchToProps(dispatch) {
     setIsPlaying,
     updateTrackInfo,
     updatePlayerInfo,
+    seekTrack,
   }, dispatch);
 }
 
@@ -241,6 +269,7 @@ const styles = StyleSheet.create({
     flex: 1,
     borderTopColor: 'gray',
     borderTopWidth: 1,
+    paddingBottom: 50,
   },
   iconButton: {
     paddingLeft: 25,

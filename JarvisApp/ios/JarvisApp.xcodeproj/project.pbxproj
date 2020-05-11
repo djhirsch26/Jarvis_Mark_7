@@ -65,9 +65,28 @@
 		574778FCD23E475D8CEEBC71 /* MaterialCommunityIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = MaterialCommunityIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf"; sourceTree = "<group>"; };
 		5F46186E20E070E8374963BB /* Pods-JarvisApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JarvisApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-JarvisApp-tvOSTests/Pods-JarvisApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		61A540EEF897209F46C754BB /* libPods-JarvisApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JarvisApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
+		6558DDE8244E4CAF00B4B592 /* Jarvis.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Jarvis.entitlements; path = JarvisApp/Jarvis.entitlements; sourceTree = "<group>"; };
 		65DAEEB7242E49ED00154EA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65DAEF08242E5A5E00154EA1 /* JarvisApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JarvisApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		65DAEF09242E5A5E00154EA1 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
+		65F56C32244E3BE500D8B7D4 /* Roboto-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-BoldItalic.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-BoldItalic.ttf"; sourceTree = "<group>"; };
+		65F56C33244E3BE500D8B7D4 /* Roboto-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Medium.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-Medium.ttf"; sourceTree = "<group>"; };
+		65F56C34244E3BE500D8B7D4 /* Roboto-Black.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Black.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-Black.ttf"; sourceTree = "<group>"; };
+		65F56C35244E3BE500D8B7D4 /* Roboto-BlackItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-BlackItalic.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-BlackItalic.ttf"; sourceTree = "<group>"; };
+		65F56C36244E3BE500D8B7D4 /* RobotoCondensed-BoldItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoCondensed-BoldItalic.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-BoldItalic.ttf"; sourceTree = "<group>"; };
+		65F56C37244E3BE500D8B7D4 /* Roboto-ThinItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-ThinItalic.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-ThinItalic.ttf"; sourceTree = "<group>"; };
+		65F56C38244E3BE600D8B7D4 /* Roboto-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Regular.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-Regular.ttf"; sourceTree = "<group>"; };
+		65F56C39244E3BE600D8B7D4 /* RobotoCondensed-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoCondensed-Bold.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-Bold.ttf"; sourceTree = "<group>"; };
+		65F56C3A244E3BE600D8B7D4 /* Roboto-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Light.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-Light.ttf"; sourceTree = "<group>"; };
+		65F56C3B244E3BE600D8B7D4 /* RobotoCondensed-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoCondensed-LightItalic.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-LightItalic.ttf"; sourceTree = "<group>"; };
+		65F56C3C244E3BE600D8B7D4 /* RobotoCondensed-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoCondensed-Regular.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-Regular.ttf"; sourceTree = "<group>"; };
+		65F56C3D244E3BE600D8B7D4 /* Roboto-Bold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Bold.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-Bold.ttf"; sourceTree = "<group>"; };
+		65F56C3E244E3BE600D8B7D4 /* RobotoCondensed-Light.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoCondensed-Light.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-Light.ttf"; sourceTree = "<group>"; };
+		65F56C3F244E3BE600D8B7D4 /* Roboto-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Italic.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-Italic.ttf"; sourceTree = "<group>"; };
+		65F56C40244E3BE600D8B7D4 /* Roboto-MediumItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-MediumItalic.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-MediumItalic.ttf"; sourceTree = "<group>"; };
+		65F56C41244E3BE700D8B7D4 /* RobotoCondensed-Italic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "RobotoCondensed-Italic.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-Italic.ttf"; sourceTree = "<group>"; };
+		65F56C42244E3BE700D8B7D4 /* Roboto-Thin.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-Thin.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-Thin.ttf"; sourceTree = "<group>"; };
+		65F56C43244E3BE700D8B7D4 /* Roboto-LightItalic.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; name = "Roboto-LightItalic.ttf"; path = "../node_modules/react-native-vector-icons/Fonts/Roboto-LightItalic.ttf"; sourceTree = "<group>"; };
 		7CC4C54BEAA341F4BE219757 /* SimpleLineIcons.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = SimpleLineIcons.ttf; path = "../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf"; sourceTree = "<group>"; };
 		8159C8172700412FBD67F3BA /* FontAwesome5_Brands.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = FontAwesome5_Brands.ttf; path = "../node_modules/react-native-vector-icons/Fonts/FontAwesome5_Brands.ttf"; sourceTree = "<group>"; };
 		87CF67291AA9486081EC7AE4 /* Feather.ttf */ = {isa = PBXFileReference; explicitFileType = undefined; fileEncoding = 9; includeInIndex = 0; lastKnownFileType = unknown; name = Feather.ttf; path = "../node_modules/react-native-vector-icons/Fonts/Feather.ttf"; sourceTree = "<group>"; };
@@ -146,6 +165,7 @@
 		13B07FAE1A68108700A75B9A /* JarvisApp */ = {
 			isa = PBXGroup;
 			children = (
+				6558DDE8244E4CAF00B4B592 /* Jarvis.entitlements */,
 				008F07F21AC5B25A0029DE68 /* main.jsbundle */,
 				13B07FAF1A68108700A75B9A /* AppDelegate.h */,
 				13B07FB01A68108700A75B9A /* AppDelegate.m */,
@@ -182,6 +202,24 @@
 		83CBB9F61A601CBA00E9B192 = {
 			isa = PBXGroup;
 			children = (
+				65F56C34244E3BE500D8B7D4 /* Roboto-Black.ttf */,
+				65F56C35244E3BE500D8B7D4 /* Roboto-BlackItalic.ttf */,
+				65F56C3D244E3BE600D8B7D4 /* Roboto-Bold.ttf */,
+				65F56C32244E3BE500D8B7D4 /* Roboto-BoldItalic.ttf */,
+				65F56C3F244E3BE600D8B7D4 /* Roboto-Italic.ttf */,
+				65F56C3A244E3BE600D8B7D4 /* Roboto-Light.ttf */,
+				65F56C43244E3BE700D8B7D4 /* Roboto-LightItalic.ttf */,
+				65F56C33244E3BE500D8B7D4 /* Roboto-Medium.ttf */,
+				65F56C40244E3BE600D8B7D4 /* Roboto-MediumItalic.ttf */,
+				65F56C38244E3BE600D8B7D4 /* Roboto-Regular.ttf */,
+				65F56C42244E3BE700D8B7D4 /* Roboto-Thin.ttf */,
+				65F56C37244E3BE500D8B7D4 /* Roboto-ThinItalic.ttf */,
+				65F56C39244E3BE600D8B7D4 /* RobotoCondensed-Bold.ttf */,
+				65F56C36244E3BE500D8B7D4 /* RobotoCondensed-BoldItalic.ttf */,
+				65F56C41244E3BE700D8B7D4 /* RobotoCondensed-Italic.ttf */,
+				65F56C3E244E3BE600D8B7D4 /* RobotoCondensed-Light.ttf */,
+				65F56C3B244E3BE600D8B7D4 /* RobotoCondensed-LightItalic.ttf */,
+				65F56C3C244E3BE600D8B7D4 /* RobotoCondensed-Regular.ttf */,
 				65DAEEB7242E49ED00154EA1 /* GoogleService-Info.plist */,
 				13B07FAE1A68108700A75B9A /* JarvisApp */,
 				832341AE1AAA6A7D00B99B32 /* Libraries */,
@@ -773,7 +811,7 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "org.reactjs.native.example.$(PRODUCT_NAME:rfc1034identifier)";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/JarvisApp.app/JarvisApp";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Jarvis.app/Jarvis";
 			};
 			name = Release;
 		};
@@ -783,6 +821,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = JarvisApp/Jarvis.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEAD_CODE_STRIPPING = NO;
 				DEVELOPMENT_TEAM = WPANTJGKW5;
@@ -808,6 +847,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_ENTITLEMENTS = JarvisApp/Jarvis.entitlements;
 				CURRENT_PROJECT_VERSION = 1;
 				DEVELOPMENT_TEAM = WPANTJGKW5;
 				INFOPLIST_FILE = JarvisApp/Info.plist;

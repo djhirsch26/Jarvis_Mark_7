@@ -13,18 +13,12 @@ import TextTicker from 'react-native-text-ticker'
 import MusicControl from 'react-native-music-control';
 
 import {
-  updateTracks,
-  setIsPlaying,
-  updateTrackInfo,
-  updatePlayerInfo
-} from '../../actions'
-
-import {
   DEFAULT_BUTTON_COLOR as DEFAULT_BUTTON_COLOR_
 } from '../../constants'
 
 const TRACK_SELECTED_COLOR = '#F4DCFF'
 const DEFAULT_BUTTON_COLOR = DEFAULT_BUTTON_COLOR_
+const ICON_SIZE=18
 
 class TrackInfo extends React.Component {
 
@@ -35,7 +29,7 @@ class TrackInfo extends React.Component {
   makeButton_(icon, onPress, color=DEFAULT_BUTTON_COLOR) {
     var button = <TouchableOpacity onPress={onPress}>
       <View style={styles.iconButton}>
-          <Icon name={icon} size={24} color={color} style={styles.flex}/>
+          <Icon name={icon} size={ICON_SIZE} color={color} style={styles.flex}/>
       </View>
     </TouchableOpacity>
 
@@ -48,20 +42,18 @@ class TrackInfo extends React.Component {
     return (
       <View style={styles.currentTrackBox}>
         <View style={styles.currentTrackImageBox}>
-          <Image source={{uri: trackInfo.image}} style = {{ width: '100%', height: '100%', resizeMode: 'center'}}/>
+          <Image source={{uri: trackInfo.image}} style = {{ width: 30, height: 30, resizeMode: 'center'}}/>
         </View>
         <View style={styles.currentTrackButtonsBox}>
+          <View style={styles.ticker}>
+            <TextTicker duration={10000} loop>
+                <Text><Text style={{fontWeight: "bold"}}>{trackInfo.name}</Text> - {trackInfo.artist}</Text>
+            </TextTicker>
+          </View>
           <View style={styles.buttons}>
             {this.makeButton_('backward', this.props.onPrev)}
             {this.makeButton_(this.props.isPlaying ? 'pause' : 'play', this.props.isPlaying ? this.props.onPause : this.props.onPlay)}
             {this.makeButton_('forward', this.props.onNext)}
-            {this.makeButton_('random', this.props.onShuffle, this.props.isShuffled ? DEFAULT_BUTTON_COLOR : 'gray')}
-          </View>
-
-          <View>
-          <TextTicker duration={10000} loop>
-              <Text><Text style={{fontWeight: "bold"}}>{trackInfo.name}</Text> - {trackInfo.artist}</Text>
-          </TextTicker>
           </View>
         </View>
       </View>
@@ -70,42 +62,16 @@ class TrackInfo extends React.Component {
   }
 }
 
-function mapStateToProps(state) {
-  return {
-    tracks: state.audio.tracks,
-    isPlaying: state.audio.playerInfo.playing,
-    isShuffled: state.audio.playerInfo.shuffling,
-    trackInfo: state.audio.trackInfo,
-  };
-}
 
-function mapDispatchToProps(dispatch) {
-  return bindActionCreators({
-    updateTracks,
-    setIsPlaying,
-    updateTrackInfo,
-    updatePlayerInfo,
-  }, dispatch);
-}
 
-export default connect(mapStateToProps, mapDispatchToProps)(TrackInfo);
+export default TrackInfo;
 
 const styles = StyleSheet.create({
-
-  buttons: {
-    flex: 1,
-    flexDirection: 'row',
-    alignItems: 'center',
-  },
-  iconButton: {
-    paddingLeft: 25,
-    paddingRight: 25,
-  },
   currentTrackBox: {
     flex: 1,
     flexDirection: 'row',
     borderColor: 'gray',
-    borderTopWidth: 2,
+    borderTopWidth: 1,
     borderBottomWidth: 1,
     borderLeftWidth: 1,
     borderRightWidth: 1,
@@ -119,14 +85,27 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     paddingTop: 2,
     paddingBottom: 2,
-    paddingLeft: 25,
-    paddingRight: 25
+    paddingLeft: 15,
   },
   currentTrackButtonsBox: {
-    flex: 5,
+    flex: 6,
     width: '100%',
-    flexDirection: 'column',
+    flexDirection: 'row',
     alignItems: 'center',
+    justifyContent: 'center'
+  },
+  buttons: {
+    flex: 2,
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-evenly'
+  },
+  iconButton: {
+    paddingLeft: 0,
+    paddingRight: 0,
+  },
+  ticker: {
+    flex: 2,
     justifyContent: 'center'
   }
 })

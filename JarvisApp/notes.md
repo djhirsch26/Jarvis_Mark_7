@@ -4,7 +4,9 @@ Had to do with not having flex set
 
 - Had to do some stuff with Roboto font adding
 
-
+- Clear derived data:https://iosdevcenters.blogspot.com/2015/12/how-to-delete-derived-data-and-clean.html
+- Can't find Derived Data file
+  - Has to do with testing, change the file path for the display name
 
 To start it:
 1. `npx react-native start`
@@ -20,6 +22,10 @@ Clear Pods: `rm -rf ios/Pods && rm -rf ios/build && cd ios && pod install`
 
 Renamed Build
 Rename the variable TEST_HOST to {app_name}.app/{app_name}
+
+Vector Icons Directory: https://oblador.github.io/react-native-vector-icons/
+
+
 
 
 ### Audio Controller Frameworks

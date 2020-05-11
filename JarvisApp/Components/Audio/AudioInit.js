@@ -10,7 +10,8 @@ import {
   setIsPlaying,
   updateTrackInfo,
   updatePlayerInfo,
-  setShuffling
+  setShuffling,
+  setRepeating
 } from '../../actions'
 
 import MusicControl from 'react-native-music-control';
@@ -50,6 +51,7 @@ class AudioInit extends React.Component {
 
     global.audioEvents.on('play', (state) => {
       console.log('Global Play', state.trackInfo, state.playerInfo)
+      state.playerInfo.accumulatedTime=0
       this.updateState(state)
 
       // Changes the state to paused
@@ -61,7 +63,7 @@ class AudioInit extends React.Component {
 
     global.audioEvents.on('pause', (state) => {
       console.log("Global Pause", state.trackInfo, state.playerInfo)
-      
+
       this.updateState(state)
       // Changes the state to paused
 
@@ -84,9 +86,18 @@ class AudioInit extends React.Component {
       this.updateState(state)
     })
 
-    global.audioEvents.on('shuffle', (data) => {
-      this.props.setShuffling(data.isShuffled)
+    global.audioEvents.on('seek', (state) => {
+      MusicControl.updatePlayback({elapsedTime: Math.floor(state.playerInfo.position)})
+      this.props.updatePlayerInfo(state.playerInfo)
+    })
 
+    global.audioEvents.on('shuffle', ({trackInfo, playerInfo}) => {
+      this.props.setShuffling(playerInfo.shuffling)
+
+    })
+
+    global.audioEvents.on('repeat', ({trackInfo, playerInfo}) => {
+      this.props.setRepeating(playerInfo.repeating)
     })
   }
 
@@ -112,6 +123,7 @@ function mapDispatchToProps(dispatch) {
     updateTrackInfo,
     updatePlayerInfo,
     setShuffling,
+    setRepeating,
   }, dispatch);
 }
 

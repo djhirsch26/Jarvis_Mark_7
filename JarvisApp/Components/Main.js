@@ -1,15 +1,17 @@
 import React from 'react'
-import { StyleSheet, Platform, Image, Text, View } from 'react-native'
+import { StyleSheet, Button, Platform, Image, Text, View } from 'react-native'
 import firebase from '@react-native-firebase/app'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
-
+import SlidingUpPanel from 'rn-sliding-up-panel';
 
 import Home from './Home/Home'
 import FileView from './File/FileView'
 import Audio from './Audio/Audio'
 import Console_ from './File/Console'
+
+import TabBar from './TabBar'
 
 import AudioEvents from './Audio/AudioEvents'
 
@@ -23,22 +25,26 @@ global.audioEvents = new AudioEvents();
 
 /* End Global Event Listeners */
 
-console.log(createBottomTabNavigator)
 const Tab = createBottomTabNavigator();
 
-export default function Tabs() {
-  return (
-    <Tab.Navigator initialRouteName={'Audio'} tabBarOptions={{
-        activeTintColor: '#000000',
-        inactiveTintColor: '#808080',
-      }}>
-      <Tab.Screen name="Home" component={Home} options={{tabBarIcon: homeIcon}} />
-      <Tab.Screen name="Files" component={FileView} options={{tabBarIcon: fileIcon}}/>
-      <Tab.Screen name="Audio" component={Audio} options={{tabBarIcon: spotifyIcon}}/>
-      <Tab.Screen name="Console" component={Console_} options={{tabBarIcon: consoleIcon}}/>
-    </Tab.Navigator>
-  );
+class Tabs extends React.Component {
+  render() {
+    return (
+      <Tab.Navigator initialRouteName={'Audio'} tabBarOptions={{
+          activeTintColor: '#000000',
+          inactiveTintColor: '#808080',
+        }}
+        tabBar={props => <TabBar {...props} />}>
+        <Tab.Screen name="Home" component={Home} options={{tabBarIcon: homeIcon}} />
+        <Tab.Screen name="Files" component={FileView} options={{tabBarIcon: fileIcon}}/>
+        <Tab.Screen name="Audio" component={Audio} options={{tabBarIcon: spotifyIcon}}/>
+        <Tab.Screen name="Console" component={Console_} options={{tabBarIcon: consoleIcon}}/>
+      </Tab.Navigator>
+    );
+  }
 }
+
+export default Tabs
 
 // export default Main = createMaterialBottomTabNavigator(
 //   {

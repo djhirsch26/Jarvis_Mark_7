@@ -3,6 +3,7 @@ import fileReducer from './fileReducer';
 import userReducer from './userReducer';
 import fileViewReducer from './fileViewReducer';
 import audioReducer from './audioReducer';
+import sliderReducer from './sliderReducer';
 
 
 const rootReducer = combineReducers({
@@ -10,6 +11,7 @@ const rootReducer = combineReducers({
   user: userReducer,
   fileView: fileViewReducer,
   audio: audioReducer,
+  slider: sliderReducer,
 });
 
 export default rootReducer;
