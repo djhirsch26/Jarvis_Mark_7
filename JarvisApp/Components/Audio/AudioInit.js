@@ -3,7 +3,7 @@ import { View } from 'react-native'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
-import SpotifyController from './SpotifyController'
+import SpotifyController from './Controllers/SpotifyController'
 
 import {
   updateTracks,

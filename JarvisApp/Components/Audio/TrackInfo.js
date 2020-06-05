@@ -7,7 +7,6 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
 import AudioEvents from './AudioEvents'
-import SpotifyController from './SpotifyController'
 
 import TextTicker from 'react-native-text-ticker'
 import MusicControl from 'react-native-music-control';

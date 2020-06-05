@@ -8,10 +8,15 @@ import { createSwitchNavigator, createAppContainer } from '@react-navigation/nat
 import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 
-import {suggestShortcuts} from "react-native-siri-shortcut";
+import {
+  SiriShortcutsEvent,
+  donateShortcut,
+  suggestShortcuts
+} from "react-native-siri-shortcut";
 
 import {siriOpts} from './utils/siri'
 
+import {triggerSkillFromIdentifier} from './skills/util'
 
 import reducers from './reducers'
 import firebaseMiddleware from './middleware/firebase'
@@ -76,6 +81,26 @@ global.store = store
 export default class App extends Component {
   componentDidMount() {
     suggestShortcuts(siriOpts)
+    console.log("SIRI SUGGEST")
+
+    SiriShortcutsEvent.addListener(
+        "SiriShortcutListener",
+        ({ userInfo, activityType }) => {
+          console.log("ON OPEN", userInfo, activityType)
+          triggerSkillFromIdentifier(activityType)
+
+            // Do something with the userInfo and/or activityType
+        }
+    );
+  }
+
+  componentWillUnmount() {
+    SiriShortcutsEvent.removeListener(
+      "SiriShortcutListener",
+      ({ userInfo, activityType }) => {
+        // Do something with userInfo and/or activityType
+      }
+    );
   }
 
   render() {

@@ -62,6 +62,10 @@ export const playMyPlaylist = {
     "gimme some tunes",
   ],
   hasButton: true,
+  canSearch: true,
+  canPredict: false,
+  title: "Play My Playlist",
+  description: "Play \"Daniel's Playlist\" on Spotify",
   buttonText: "Play My Playlist",
   protocol: [
     "bump Protocol"
@@ -82,6 +86,9 @@ export const avengers = {
     "assemble",
   ],
   hasButton: true,
+  canSearch: true,
+  canPredict: false,
+  title: "Avenger's Protocol",
   buttonText: "A",
   protocol: [
     "Avengers Protocol"
@@ -98,6 +105,10 @@ export const playRecent = {
     "gimme some tunes",
   ],
   hasButton: true,
+  canSearch: true,
+  canPredict: true,
+  title: "Play Recent Songs",
+  description: "Play your spotify playlist with a recency bias",
   buttonText: "Recent Bias",
   protocol: [
     "bump"

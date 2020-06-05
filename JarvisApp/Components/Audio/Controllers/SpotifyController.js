@@ -4,7 +4,7 @@ import {
   CLIENT_ID,
   CLIENT_SECRET,
   SCOPES
-} from './private/spotify'
+} from '../private/spotify'
 
 import {
   SPOTIFY_TOKEN_REFRESH,
@@ -12,9 +12,9 @@ import {
   SPOTIFY_REDIRECT_URL,
   SPOTIFY_INITAL_TRACK,
   REPEAT
-} from '../../constants'
+} from '../../../constants'
 
-import {shuffle} from '../../utils'
+import {shuffle} from '../../../utils'
 
 class SpotifyController {
 
@@ -57,25 +57,9 @@ class SpotifyController {
     })
 
     Spotify.addListener('login', (data) => {
-      // console.log('Login Event', data)
-      const playlist = SPOTIFY_INITAL_TRACK
-      const request = this.getTracks(playlist)
-      request.then((tracks) => {
-        tracks = tracks.map(track => {
-          track.playlist = playlist
-          return track;
-        })
-        // tracks.forEach((track, index) => {
-        //   this.tracksOriginal_[track.track.uri] = index
-        // })
-        // shuffle(tracks)
-        tracks.forEach((track, index) => {
-          this.tracks_[track.track.uri] = index
-        })
-        global.audioEvents.emit('update_tracks', tracks)
-      }).catch((e) => {
-        console.log('error', e)
-      })
+        // console.log('Login Event', data)
+        this.playlist_ = SPOTIFY_INITAL_TRACK
+        this.updateTracks_(this.playlist_)
     })
 
     Spotify.addListener('trackChange', (data) => {
@@ -128,6 +112,32 @@ class SpotifyController {
         global.audioEvents.emit('repeat', {trackInfo, playerInfo})
       }
     })
+
+  }
+
+  static updateTracks_(playlist) {
+    const promise = new Promise((resolve, reject) => {
+      const request = this.getTracks(playlist)
+      request.then((tracks) => {
+        tracks = tracks.map(track => {
+          track.playlist = playlist
+          return track;
+        })
+        // tracks.forEach((track, index) => {
+        //   this.tracksOriginal_[track.track.uri] = index
+        // })
+        // shuffle(tracks)
+        tracks.forEach((track, index) => {
+          this.tracks_[track.track.uri] = index
+        })
+        console.log(tracks[0], tracks[1])
+        global.audioEvents.emit('update_tracks', tracks)
+        resolve(true)
+      }).catch((e) => {
+        reject(e)
+      });
+    })
+    return promise
 
   }
 
@@ -205,6 +215,10 @@ class SpotifyController {
 
   static resume() {
     Spotify.setPlaying(true)
+  }
+
+  static refresh() {
+    return this.updateTracks_(this.playlist_)
   }
 
   static playURI(spotifyURI, startIndex=0, startPosition=0, extraData={}) {

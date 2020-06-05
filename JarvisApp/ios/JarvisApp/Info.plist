@@ -4,7 +4,8 @@
 <dict>
 	<key>NSUserActivityTypes</key>
 	<array>
-		<string>org.reactjs.native.example.JarvisApp2.playRecent</string>
+		<string>org.reactjs.native.example.JarvisApp.test</string>
+		<string>org.reactjs.native.example.JarvisApp.playRecent</string>
 	</array>
 	<key>CFBundleDevelopmentRegion</key>
 	<string>en</string>

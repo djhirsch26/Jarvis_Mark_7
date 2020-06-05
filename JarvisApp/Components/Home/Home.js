@@ -1,16 +1,18 @@
 import React from 'react'
-import { StyleSheet, Platform, Image, ScrollView, Text, View } from 'react-native'
+import { StyleSheet, Platform, Image, ScrollView, Text, View, Button} from 'react-native'
 import {firebase} from '@react-native-firebase/auth'
 import Icon from 'react-native-vector-icons/FontAwesome';
 
-import { Toolbar, Button, COLOR } from 'react-native-material-ui';
+import { Toolbar, COLOR } from 'react-native-material-ui';
 
 import ButtonContainer from './ButtonContainer'
 
 import * as Skills from '../../skills'
 
 export default class Home extends React.Component {
-  state = { currentUser: null }
+  state = { currentUser: null,
+    text: "HI"
+   }
 
   componentDidMount() {
     const { currentUser } = firebase.auth()
@@ -45,6 +47,7 @@ export default class Home extends React.Component {
           <View style={styles.buttons}>
             {buttons}
           </View>
+
         </View>
       </View>
     )

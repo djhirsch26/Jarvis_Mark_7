@@ -7,7 +7,7 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
 import AudioEvents from './AudioEvents'
-import SpotifyController from './SpotifyController'
+import SpotifyController from './Controllers/SpotifyController'
 
 import MusicControl from 'react-native-music-control';
 
@@ -35,6 +35,9 @@ class Audio extends React.Component {
 
   constructor() {
     super();
+    this.state = {
+      isFetching: false,
+     }
   }
 
   componentDidMount() {
@@ -117,6 +120,16 @@ MusicControl.enableControl('remoteVolume', true)
         this.currentController.setRepeating(REPEAT.OFF)
         break;
     }
+  }
+
+  doRefresh() {
+    this.currentController.refresh().then((e) => {
+      this.setState({ isFetching: false })
+    })
+  }
+
+  onRefresh() {
+     this.setState({ isFetching: true }, function() { this.doRefresh() });
   }
 
   onTrackPress(track) {
@@ -211,6 +224,8 @@ MusicControl.enableControl('remoteVolume', true)
               keyExtractor={(item) => {
                 return item.track.id;
               }}
+              onRefresh={() => this.onRefresh()}
+              refreshing={this.state.isFetching}
             />
             </View>
             {this.renderCurrentTrack()}

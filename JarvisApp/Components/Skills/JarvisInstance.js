@@ -4,7 +4,7 @@ import { View, Text, ActivityIndicator, StyleSheet } from 'react-native'
 import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
-import SpotifyController from '../Audio/SpotifyController'
+import SpotifyController from '../Audio/Controllers/SpotifyController'
 
 class JarvisInstance extends React.Component {
   componentDidMount() {

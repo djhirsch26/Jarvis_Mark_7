@@ -25,6 +25,8 @@ Rename the variable TEST_HOST to {app_name}.app/{app_name}
 
 Vector Icons Directory: https://oblador.github.io/react-native-vector-icons/
 
+How to release build to phone: https://medium.com/@tewolfe2/deploying-a-react-native-application-to-your-iphone-1d5f9757be48
+
 
 
 

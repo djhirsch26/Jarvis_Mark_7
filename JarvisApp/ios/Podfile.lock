@@ -262,6 +262,11 @@ PODS:
     - React
   - react-native-track-player (2.0.0-rc9):
     - React
+  - react-native-video (4.4.5):
+    - React
+    - react-native-video/Video (= 4.4.5)
+  - react-native-video/Video (4.4.5):
+    - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
   - React-RCTAnimation (0.61.5):
@@ -319,6 +324,11 @@ PODS:
     - React
   - RNSiriShortcuts (1.7.0):
     - React
+  - RNSound (0.11.0):
+    - React
+    - RNSound/Core (= 0.11.0)
+  - RNSound/Core (0.11.0):
+    - React
   - RNSpotify (1.2.13):
     - React
     - RNEventEmitter
@@ -346,6 +356,7 @@ DEPENDENCIES:
   - react-native-music-control (from `../node_modules/react-native-music-control`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-track-player (from `../node_modules/react-native-track-player`)
+  - react-native-video (from `../node_modules/react-native-video`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -366,6 +377,7 @@ DEPENDENCIES:
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNScreens (from `../node_modules/react-native-screens`)
   - RNSiriShortcuts (from `../node_modules/react-native-siri-shortcut`)
+  - RNSound (from `../node_modules/react-native-sound`)
   - RNSpotify (from `../node_modules/rn-spotify-sdk`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -423,6 +435,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-track-player:
     :path: "../node_modules/react-native-track-player"
+  react-native-video:
+    :path: "../node_modules/react-native-video"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -461,6 +475,8 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-screens"
   RNSiriShortcuts:
     :path: "../node_modules/react-native-siri-shortcut"
+  RNSound:
+    :path: "../node_modules/react-native-sound"
   RNSpotify:
     :path: "../node_modules/rn-spotify-sdk"
   RNVectorIcons:
@@ -501,6 +517,7 @@ SPEC CHECKSUMS:
   react-native-music-control: a73cc4c0af6ed9b3204649756a33078a87ed2f03
   react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
   react-native-track-player: 36e250a77705e5edc34b12020fd526511070971f
+  react-native-video: eee541262ada11bc7ffe8ec5508e6a877937c462
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -520,6 +537,7 @@ SPEC CHECKSUMS:
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
   RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
   RNSiriShortcuts: add1c50178d5a17c2ae15ef641051938eeef4c58
+  RNSound: da030221e6ac7e8290c6b43f2b5f2133a8e225b0
   RNSpotify: 56a20358ebbae1dff52a8c4b3a933a0c0bc2eaf8
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b

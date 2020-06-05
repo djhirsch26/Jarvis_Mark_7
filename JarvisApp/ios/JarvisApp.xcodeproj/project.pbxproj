@@ -17,6 +17,7 @@
 		2D02E4BD1E0B4A84006451C7 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 13B07FB51A68108700A75B9A /* Images.xcassets */; };
 		2D02E4BF1E0B4AB3006451C7 /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 13B07FB71A68108700A75B9A /* main.m */; };
 		2DCD954D1E0B4F2C00145EB5 /* JarvisAppTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 00E356F21AD99517003FC87E /* JarvisAppTests.m */; };
+		6558DDEA246B119000B4B592 /* Intents.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6558DDE9246B119000B4B592 /* Intents.framework */; };
 		65DAEEB8242E49ED00154EA1 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 65DAEEB7242E49ED00154EA1 /* GoogleService-Info.plist */; };
 		65DAEF0A242E5A5E00154EA1 /* dummy.swift in Sources */ = {isa = PBXBuildFile; fileRef = 65DAEF09242E5A5E00154EA1 /* dummy.swift */; };
 		83242AF69BB5920ADE7B63B2 /* libPods-JarvisApp.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 502417706ED60DD9DB48AD7C /* libPods-JarvisApp.a */; };
@@ -66,6 +67,7 @@
 		5F46186E20E070E8374963BB /* Pods-JarvisApp-tvOSTests.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-JarvisApp-tvOSTests.release.xcconfig"; path = "Target Support Files/Pods-JarvisApp-tvOSTests/Pods-JarvisApp-tvOSTests.release.xcconfig"; sourceTree = "<group>"; };
 		61A540EEF897209F46C754BB /* libPods-JarvisApp-tvOS.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = "libPods-JarvisApp-tvOS.a"; sourceTree = BUILT_PRODUCTS_DIR; };
 		6558DDE8244E4CAF00B4B592 /* Jarvis.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; name = Jarvis.entitlements; path = JarvisApp/Jarvis.entitlements; sourceTree = "<group>"; };
+		6558DDE9246B119000B4B592 /* Intents.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Intents.framework; path = System/Library/Frameworks/Intents.framework; sourceTree = SDKROOT; };
 		65DAEEB7242E49ED00154EA1 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 		65DAEF08242E5A5E00154EA1 /* JarvisApp-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JarvisApp-Bridging-Header.h"; sourceTree = "<group>"; };
 		65DAEF09242E5A5E00154EA1 /* dummy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = dummy.swift; sourceTree = "<group>"; };
@@ -122,6 +124,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6558DDEA246B119000B4B592 /* Intents.framework in Frameworks */,
 				83242AF69BB5920ADE7B63B2 /* libPods-JarvisApp.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -182,6 +185,7 @@
 		2D16E6871FA4F8E400B85C8A /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6558DDE9246B119000B4B592 /* Intents.framework */,
 				ED297162215061F000B7C4FE /* JavaScriptCore.framework */,
 				ED2971642150620600B7C4FE /* JavaScriptCore.framework */,
 				502417706ED60DD9DB48AD7C /* libPods-JarvisApp.a */,
@@ -568,24 +572,6 @@
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialCommunityIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/MaterialIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Octicons.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-Black.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-BlackItalic.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-Bold.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-BoldItalic.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-Italic.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-Light.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-LightItalic.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-Medium.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-MediumItalic.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-Regular.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-Thin.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Roboto-ThinItalic.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-Bold.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-BoldItalic.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-Italic.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-Light.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-LightItalic.ttf",
-				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/RobotoCondensed-Regular.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/SimpleLineIcons.ttf",
 				"${PODS_ROOT}/../../node_modules/react-native-vector-icons/Fonts/Zocial.ttf",
 			);
@@ -605,24 +591,6 @@
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialCommunityIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/MaterialIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Octicons.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-Black.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-BlackItalic.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-Bold.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-BoldItalic.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-Italic.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-Light.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-LightItalic.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-Medium.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-MediumItalic.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-Regular.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-Thin.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Roboto-ThinItalic.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RobotoCondensed-Bold.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RobotoCondensed-BoldItalic.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RobotoCondensed-Italic.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RobotoCondensed-Light.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RobotoCondensed-LightItalic.ttf",
-				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/RobotoCondensed-Regular.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/SimpleLineIcons.ttf",
 				"${TARGET_BUILD_DIR}/${UNLOCALIZED_RESOURCES_FOLDER_PATH}/Zocial.ttf",
 			);

@@ -8,6 +8,9 @@ export const REQUIRE_TOKEN = 'require-token'
 export const DEFAULT_BUTTON_COLOR = '#841584'
 export const OFF_BUTTON_COLOR = '#545454'
 
+// Important
+export const ORG_IDENTIFIER = "org.reactjs.native.example.JarvisApp."
+
 // Audio Actions
 export const UPDATE_TRACKS = 'update-tracks'
 export const SET_IS_PLAYING = 'set-is-playing'
