@@ -43,7 +43,7 @@ class Buttons extends React.Component {
 
           <View style={{flex: 1}}>
             <View style={{flex: 1, justifyContent: 'space-evenly', alignItems: 'center', flexDirection: 'row'}}>
-              <TouchableOpacity onPress={() => global.audioEvents.emit('request_shuffle')}>
+              <TouchableOpacity onPress={() => global.audioEvents.emit('request_shuffle')} disabled={!this.props.canShuffle}>
                 <View style={{justifyContent: 'center', alignItems: 'center'}}>
                   <Icon name={"random"} size={ICON_SIZE} color={this.props.isShuffled ? DEFAULT_BUTTON_COLOR : OFF_BUTTON_COLOR} style={styles.flex}/>
                 </View>
@@ -69,6 +69,7 @@ function mapStateToProps(state) {
   return {
     isPlaying: state.audio.playerInfo.playing,
     isShuffled: state.audio.playerInfo.shuffling,
+    canShuffle: state.audio.playerInfo.canShuffle,
     repeatMode: state.audio.playerInfo.repeating,
     trackInfo: state.audio.trackInfo,
     playerInfo: state.audio.playerInfo,

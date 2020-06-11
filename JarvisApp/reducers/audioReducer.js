@@ -10,12 +10,14 @@ import {
 
 var initialState = {
   tracks: [],
-  trackInfo: {"album": "American Oxygen", "artist": "Rihanna", "duration": 320.161, "image": "http://i.scdn.co/image/ab67616d0000b273fcf5ae6bc3b8b7c68cee71ba", "index": 2, "name": "American Oxygen"},
+  trackInfo: {"album": "American Oxygen", "artist": "Rihanna", "duration": 320.161, "image": "http://i.scdn.co/image/ab67616d0000b273fcf5ae6bc3b8b7c68cee71ba", "index": -1, "name": "American Oxygen"},
   playerInfo: {
     playing: false,
     position: 0,
     repeating: REPEAT.OFF,
     shuffling: false,
+    canShuffle: true,
+    buffering: false,
     time: undefined,
   }
 }

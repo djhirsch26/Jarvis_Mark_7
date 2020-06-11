@@ -4,6 +4,7 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
 import SpotifyController from './Controllers/SpotifyController'
+import SoundcloudController from './Controllers/SoundcloudController'
 
 import {
   updateTracks,
@@ -22,6 +23,7 @@ class AudioInit extends React.Component {
 
   componentDidMount() {
     SpotifyController.init()
+    SoundcloudController.init()
 
     MusicControl.enableBackgroundMode(true);
     MusicControl.handleAudioInterruptions(true);
@@ -50,19 +52,18 @@ class AudioInit extends React.Component {
     })
 
     global.audioEvents.on('play', (state) => {
-      console.log('Global Play', state.trackInfo, state.playerInfo)
-      state.playerInfo.accumulatedTime=0
+      console.log('Global Play')
       this.updateState(state)
 
       // Changes the state to paused
       MusicControl.updatePlayback({
-        state: MusicControl.STATE_PLAYING,
+        state: state.playerInfo.playing ? MusicControl.STATE_PLAYING : MusicControl.STATE_PAUSED,
         elapsedTime: Math.floor(state.playerInfo.position),
       })
     })
 
     global.audioEvents.on('pause', (state) => {
-      console.log("Global Pause", state.trackInfo, state.playerInfo)
+      console.log("Global Pause")
 
       this.updateState(state)
       // Changes the state to paused
@@ -74,7 +75,7 @@ class AudioInit extends React.Component {
     })
 
     global.audioEvents.on('track_change', (state) => {
-      console.log('Track Changed', state.trackInfo, state.playerInfo)
+      console.log('Track Changed')
       MusicControl.setNowPlaying({
         title: state.trackInfo.name,
         artwork: state.trackInfo.image, // URL or RN's image require()
@@ -98,6 +99,10 @@ class AudioInit extends React.Component {
 
     global.audioEvents.on('repeat', ({trackInfo, playerInfo}) => {
       this.props.setRepeating(playerInfo.repeating)
+    })
+
+    global.audioEvents.on('update_trackinfo', ({trackInfo}) => {
+      this.props.updateTrackInfo(trackInfo)
     })
   }
 

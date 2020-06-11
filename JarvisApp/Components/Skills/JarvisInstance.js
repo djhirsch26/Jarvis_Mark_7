@@ -5,6 +5,7 @@ import { bindActionCreators } from 'redux';
 import {connect} from 'react-redux';
 
 import SpotifyController from '../Audio/Controllers/SpotifyController'
+import SoundcloudController from '../Audio/Controllers/SoundcloudController'
 
 class JarvisInstance extends React.Component {
   componentDidMount() {
@@ -53,6 +54,10 @@ class JarvisInstance extends React.Component {
       SpotifyShuffle() {
         console.log("Spotify Shuffle")
         SpotifyController.onShuffle(true)
+      },
+
+      SoundCloudPlay(trackURI) {
+        SoundcloudController.playURI(trackURI)
       }
     }
 

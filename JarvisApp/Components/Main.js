@@ -9,7 +9,7 @@ import SlidingUpPanel from 'rn-sliding-up-panel';
 import Home from './Home/Home'
 import FileView from './File/FileView'
 import Audio from './Audio/Audio'
-import Console_ from './File/Console'
+import Console_ from './Bluetooth/Console'
 
 import TabBar from './TabBar'
 

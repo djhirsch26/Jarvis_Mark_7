@@ -8,6 +8,8 @@ import {connect} from 'react-redux';
 
 import AudioEvents from './AudioEvents'
 import SpotifyController from './Controllers/SpotifyController'
+import NoOpController from './Controllers/NoOpController'
+import SoundcloudController from './Controllers/SoundcloudController'
 
 import MusicControl from 'react-native-music-control';
 
@@ -21,6 +23,9 @@ import {
   updatePlayerInfo,
   seekTrack,
 } from '../../actions'
+
+import Video from 'react-native-video';
+
 
 import {
   DEFAULT_BUTTON_COLOR as DEFAULT_BUTTON_COLOR_,
@@ -38,10 +43,14 @@ class Audio extends React.Component {
     this.state = {
       isFetching: false,
      }
+     this.currentController = SoundcloudController
+     // this.currentController = SpotifyController
   }
 
   componentDidMount() {
-    this.currentController = SpotifyController
+    // this.currentController = SoundcloudController
+
+    this.props.updatePlayerInfo(this.currentController.enable())
 
     global.audioEvents.on('request_play', () => {this.play()})
     global.audioEvents.on('request_pause', () => this.pause())
@@ -70,7 +79,19 @@ MusicControl.enableControl('remoteVolume', true)
     /**************/
     // this.spotifyController = new SpotifyController(this.audioEvents);
     // this.currentController = this.spotifyController;
+    this.currentController.enable();
 
+  }
+
+  componentWillUnmount() {
+    global.audioEvents.removeAllListeners(['request_play',
+    'request_pause',
+    'request_prev',
+    'request_next',
+    'request_shuffle',
+    'request_seek',
+    'request_repeat'])
+    this.currentController.disable()
   }
 
   onPressThing() {
@@ -79,6 +100,7 @@ MusicControl.enableControl('remoteVolume', true)
   }
 
   play() {
+    console.log("HELP", this.currentController)
     this.currentController.resume()
   }
 
@@ -108,7 +130,6 @@ MusicControl.enableControl('remoteVolume', true)
   }
 
   onRepeat() {
-    console.log("REPEAT MODE: ", this.props.repeatMode)
     switch(this.props.repeatMode) {
       case REPEAT.OFF:
         this.currentController.setRepeating(REPEAT.CONTEXT)
@@ -146,7 +167,7 @@ MusicControl.enableControl('remoteVolume', true)
   }
 
   renderTrack({item, index}) {
-    const name = item.track.name;
+    const name = item.name;
     const icon = 'music'
     var backgroundColor = (this.props.trackInfo && index == this.props.trackInfo.index) ? TRACK_SELECTED_COLOR : undefined
     return (
@@ -203,7 +224,6 @@ MusicControl.enableControl('remoteVolume', true)
     // const AudioControls =
     return (
       <View style={styles.container}>
-
         <Toolbar
           centerElement={centerElement}
           style={{
@@ -212,6 +232,7 @@ MusicControl.enableControl('remoteVolume', true)
           }}
         />
         <View style={styles.container}>
+          {this.currentController.render()}
 
           <TouchableOpacity onPress={this.onRandomPress.bind(this)} style={{alignItems: 'center', justifyContent: 'center', fontSize: 16, paddingTop: 8, paddingBottom: 8, backgroundColor: '#e3edfc'}}>
             <Text style={{fontWeight: "bold"}}> Shuffle Play </Text>
@@ -222,7 +243,7 @@ MusicControl.enableControl('remoteVolume', true)
               data={this.props.tracks}
               renderItem={this.renderTrack.bind(this)}
               keyExtractor={(item) => {
-                return item.track.id;
+                return item.id;
               }}
               onRefresh={() => this.onRefresh()}
               refreshing={this.state.isFetching}

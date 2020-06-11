@@ -1,15 +1,13 @@
-class NoOp {
-  static init() {}
-  static resume() {}
-  static pause() {}
-  static onNext() {}
-  static onPrev() {}
-  static onShuffle() {}
-  static setRepeating() {}
-  static seek(x) {}
-  static refresh() {}
-  static playTrack() {}
+import BaseController from './BaseController'
 
+class NoOp extends BaseController {
+  static getPlayerInfo() {
+    return {}
+  }
+
+  static enable() {}
+
+  static prepareForDisable() {}
 }
 
 export default NoOp
