@@ -5820,6 +5820,11 @@ react-is@^16.12.0, react-is@^16.13.0, react-is@^16.7.0, react-is@^16.8.1, react-
   resolved "https://registry.yarnpkg.com/react-is/-/react-is-16.13.1.tgz#789729a4dc36de2999dc156dd6c1d9c18cea56a4"
   integrity sha512-24e6ynE2H+OKt4kqsOvNd8kBpV65zoxbA4BVsEOB3ARVWQki/DHzaUoC5KuON/BiccDaCCTZBuOcfZs70kR8bQ==
 
+react-native-ble-plx@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/react-native-ble-plx/-/react-native-ble-plx-2.0.0.tgz#e4ef38844922efeaa04836d33d548cfa7838604a"
+  integrity sha512-e6ProO4b24bJwzcJADgbioLcCBZ4fE4pqKT0el1v6KR7tFZOLSDO8hYLLz9l8RX8/OBoIX+8T4c02aURkAuMcA==
+
 react-native-events@^1.0.15:
   version "1.0.15"
   resolved "https://registry.yarnpkg.com/react-native-events/-/react-native-events-1.0.15.tgz#d14b75087664ab5b1a8e14e85adda66a4cf328c3"

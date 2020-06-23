@@ -264,7 +264,14 @@ PODS:
     - React
   - react-native-safe-area-context (0.7.3):
     - React
-  - react-native-track-player (2.0.0-rc13):
+  - react-native-track-player (2.0.0-rc9):
+    - React
+  - react-native-video (4.4.5):
+    - React
+    - react-native-video/Video (= 4.4.5)
+  - react-native-video/Video (4.4.5):
+    - React
+  - react-native-webview (10.2.3):
     - React
   - React-RCTActionSheet (0.61.5):
     - React-Core/RCTActionSheetHeaders (= 0.61.5)
@@ -319,7 +326,14 @@ PODS:
     - React
   - RNGestureHandler (1.6.1):
     - React
-  - RNScreens (2.5.0):
+  - RNScreens (2.4.0):
+    - React
+  - RNSiriShortcuts (1.7.0):
+    - React
+  - RNSound (0.11.0):
+    - React
+    - RNSound/Core (= 0.11.0)
+  - RNSound/Core (0.11.0):
     - React
   - RNSpotify (1.2.13):
     - React
@@ -349,6 +363,8 @@ DEPENDENCIES:
   - react-native-music-control (from `../node_modules/react-native-music-control`)
   - react-native-safe-area-context (from `../node_modules/react-native-safe-area-context`)
   - react-native-track-player (from `../node_modules/react-native-track-player`)
+  - react-native-video (from `../node_modules/react-native-video`)
+  - react-native-webview (from `../node_modules/react-native-webview`)
   - React-RCTActionSheet (from `../node_modules/react-native/Libraries/ActionSheetIOS`)
   - React-RCTAnimation (from `../node_modules/react-native/Libraries/NativeAnimation`)
   - React-RCTBlob (from `../node_modules/react-native/Libraries/Blob`)
@@ -368,6 +384,8 @@ DEPENDENCIES:
   - RNFileViewer (from `../node_modules/react-native-file-viewer`)
   - RNGestureHandler (from `../node_modules/react-native-gesture-handler`)
   - RNScreens (from `../node_modules/react-native-screens`)
+  - RNSiriShortcuts (from `../node_modules/react-native-siri-shortcut`)
+  - RNSound (from `../node_modules/react-native-sound`)
   - RNSpotify (from `../node_modules/rn-spotify-sdk`)
   - RNVectorIcons (from `../node_modules/react-native-vector-icons`)
   - Yoga (from `../node_modules/react-native/ReactCommon/yoga`)
@@ -429,6 +447,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-safe-area-context"
   react-native-track-player:
     :path: "../node_modules/react-native-track-player"
+  react-native-video:
+    :path: "../node_modules/react-native-video"
+  react-native-webview:
+    :path: "../node_modules/react-native-webview"
   React-RCTActionSheet:
     :path: "../node_modules/react-native/Libraries/ActionSheetIOS"
   React-RCTAnimation:
@@ -465,6 +487,10 @@ EXTERNAL SOURCES:
     :path: "../node_modules/react-native-gesture-handler"
   RNScreens:
     :path: "../node_modules/react-native-screens"
+  RNSiriShortcuts:
+    :path: "../node_modules/react-native-siri-shortcut"
+  RNSound:
+    :path: "../node_modules/react-native-sound"
   RNSpotify:
     :path: "../node_modules/rn-spotify-sdk"
   RNVectorIcons:
@@ -504,9 +530,11 @@ SPEC CHECKSUMS:
   React-jsiexecutor: d5525f9ed5f782fdbacb64b9b01a43a9323d2386
   React-jsinspector: fa0ecc501688c3c4c34f28834a76302233e29dc0
   react-native-ble-plx: 21acd4201f9de46ab690b24898e8d3ad02f518fd
-  react-native-music-control: e6ef45ab35dc42510fc1a632ad1c078047304b9f
-  react-native-safe-area-context: 8260e5157617df4b72865f44006797f895b2ada7
-  react-native-track-player: 6c2c2f163534bb6d6b5fea68959b3641f70718dd
+  react-native-music-control: a73cc4c0af6ed9b3204649756a33078a87ed2f03
+  react-native-safe-area-context: e200d4433aba6b7e60b52da5f37af11f7a0b0392
+  react-native-track-player: 36e250a77705e5edc34b12020fd526511070971f
+  react-native-video: eee541262ada11bc7ffe8ec5508e6a877937c462
+  react-native-webview: 0bacc79175bc44869e4c1a015b9bc21df8cf4feb
   React-RCTActionSheet: 600b4d10e3aea0913b5a92256d2719c0cdd26d76
   React-RCTAnimation: 791a87558389c80908ed06cc5dfc5e7920dfa360
   React-RCTBlob: d89293cc0236d9cb0933d85e430b0bbe81ad1d72
@@ -518,14 +546,16 @@ SPEC CHECKSUMS:
   React-RCTVibration: a49a1f42bf8f5acf1c3e297097517c6b3af377ad
   ReactCommon: 198c7c8d3591f975e5431bec1b0b3b581aa1c5dd
   rn-fetch-blob: f065bb7ab7fb48dd002629f8bdcb0336602d3cba
-  RNCMaskedView: 5dba3cb07493765fb66156c83c3dd281ca709a48
-  RNEventEmitter: a43a853a0de1dee334d007a4b3d2a6dc29c77270
+  RNCMaskedView: 71fc32d971f03b7f03d6ab6b86b730c4ee64f5b6
+  RNEventEmitter: db22b54ae7d9be0bd5725613f79a51e2bc364a93
   RNFBApp: 7d4006751de8bb5cafa2e8d2e7d94ee250df81db
   RNFBAuth: ed8b865db45f7ded9dbf535e390cba2ba672aede
   RNFileViewer: b815b353fdc08552766c6325e5b66ff52bb6b7af
   RNGestureHandler: 8f09cd560f8d533eb36da5a6c5a843af9f056b38
-  RNScreens: ac02d0e4529f08ced69f5580d416f968a6ec3a1d
-  RNSpotify: db833fc2befb85748faf82fc768d383a104bc677
+  RNScreens: b5c0e1b2b04512919e78bd3898e144a157ce2363
+  RNSiriShortcuts: add1c50178d5a17c2ae15ef641051938eeef4c58
+  RNSound: da030221e6ac7e8290c6b43f2b5f2133a8e225b0
+  RNSpotify: 56a20358ebbae1dff52a8c4b3a933a0c0bc2eaf8
   RNVectorIcons: 0bb4def82230be1333ddaeee9fcba45f0b288ed4
   Yoga: f2a7cd4280bfe2cca5a7aed98ba0eb3d1310f18b
 

@@ -30,7 +30,7 @@ const Tab = createBottomTabNavigator();
 class Tabs extends React.Component {
   render() {
     return (
-      <Tab.Navigator initialRouteName={'Audio'} tabBarOptions={{
+      <Tab.Navigator initialRouteName={'Console'} tabBarOptions={{
           activeTintColor: '#000000',
           inactiveTintColor: '#808080',
         }}

@@ -1,0 +1,11 @@
+{
+  "name": "text",
+  "version": "1.0.0",
+  "description": "Text communication for embedded pi",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Daniel Hirsch",
+  "license": "ISC"
+}

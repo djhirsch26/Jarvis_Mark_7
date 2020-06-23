@@ -1,0 +1,14 @@
+{
+  "name": "bluetooth",
+  "version": "1.0.0",
+  "description": "Bluetooth Package for Jarvis",
+  "main": "app.js",
+  "scripts": {
+    "test": "test"
+  },
+  "author": "Daniel Hirsch",
+  "license": "ISC",
+  "dependencies": {
+    "@abandonware/bleno": "^0.5.1-2"
+  }
+}
