@@ -9,4 +9,5 @@ popd > /dev/null
 
 pushd /Jarvis/src/speech_process > /dev/null
 npm link mqtt
+npm link axios
 popd > /dev/null

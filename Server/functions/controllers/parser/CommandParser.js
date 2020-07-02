@@ -1,11 +1,13 @@
 // The command matching code is a modified version of Annyang, under the MIT license.
 var commandsList = [];
 
+// Modified for non-escaped ?,|
+
 var optionalParam = /\s*\((.*?)\)\s*/g;
-var optionalRegex = /(\(\?:[^)]+\))\?/g;
+var optionalRegex = /(\(\?:[^)|]+\))\?/g;
 var namedParam    = /(\(\?)?:\w+/g;
 var splatParam    = /\*\w+/g;
-var escapeRegExp  = /[-{}[\]+?.,\\^$|#]/g;
+var escapeRegExp  = /[-{}[\]?+.,\\^$#]/g;
 var commandToRegExp = function(command) {
  command = command
    .replace(escapeRegExp, '\\$&')
@@ -36,7 +38,7 @@ var init = function() {
 
 
 // try and match recognized text to one of the commands on the list
-var parseResults = function(commandText) {
+var parseResults = async function(commandText) {
     // try and match recognized text to one of the commands on the list
     for (let j = 0; j < commandsList.length; j++) {
       var currentCommand = commandsList[j];
@@ -44,8 +46,7 @@ var parseResults = function(commandText) {
       if (result) {
         var parameters = result.slice(1);
         // execute the matched command
-        currentCommand.callback.apply(this, parameters);
-        return;
+        return currentCommand.callback.apply(this, parameters);
       }
     }
   };

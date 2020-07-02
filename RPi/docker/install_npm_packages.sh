@@ -5,4 +5,4 @@
 npm -g config set user root
 
 # Get mqtt and bleno for Communication
-npm install -g mqtt @abandonware/bleno
+npm install -g mqtt @abandonware/bleno axios

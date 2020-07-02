@@ -2,7 +2,7 @@ var express = require('express')
 var router = express.Router()
 
 const auth = require('../controllers/auth')
-const Spotify = require('../controllers/spotify').spotify
+const Spotify = require('../controllers/spotify')
 
 // We do not do Firebase Authentication for refresh and swap.
 // router.use(auth.firebase.verifyToken)

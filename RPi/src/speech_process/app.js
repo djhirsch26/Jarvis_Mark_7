@@ -49,9 +49,9 @@ function parseProtocol(protocol) {
 function parseMessage(message) {
   const BB_11 = 317238901
 
-  console.log("Parsing Message!")
-  var result = JCommandParser.parseText(message)
-
+  // var result = await axios.post()
+  // var result = JCommandParser.parseText(message)
+  console.log("Parsing Message!", result)
 
   return ['PLAY', 'SOUNDCLOUD', BB_11]
 }

@@ -1,3 +1,1 @@
-module.exports = {
-  spotify: require('./spotify')
-}
+module.exports = require('./spotify')
