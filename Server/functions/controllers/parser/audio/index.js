@@ -25,8 +25,6 @@ const audio = async function(main_param, artist='', album_or_platform='') {
       return await generateSpotifyCommand(...query)
   }
 
-  return result;
-
 }
 
 function isPlatform_(platformName) {

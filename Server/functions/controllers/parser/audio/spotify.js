@@ -31,7 +31,6 @@ async function generateSpotifyCommand(main_param, artist, album) {
     payload = [results[0]]
   }
 
-  // return ['SPOTIFY', 'PLAY', 'PLAYLIST', 'spotify:playlist:1TIzQuYM2bG6X6giwGaISF']
   return ['SPOTIFY', 'PLAY', 'TRACKS', JSON.stringify(payload)]
 }
 

@@ -6,6 +6,7 @@ const SERVICE_UUID = '304d6227cbd540a5919913cf1fc01003'
 const DEV_NAME = 'Jarvis'
 
 const bleno = require('@abandonware/bleno');
+console.log("HUH")
 bleno.on('stateChange', function(state) {
     console.log('on stateChange: ' + state);
     if (state === 'poweredOn') {
@@ -23,8 +24,9 @@ bleno.on('stateChange', function(state) {
 // data.writeUInt8(now.getSeconds(), 2);
 // callback(data);
 this.callback = null;
+this.temp = "SADDD"
 
-bleno.on('advertisingStart', function(error) {
+bleno.on('advertisingStart', (function(error) {
   if (!error) {
     bleno.setServices([
       // link loss service
@@ -38,6 +40,7 @@ bleno.on('advertisingStart', function(error) {
             properties: ['read'],
             onSubscribe(offset, callback) {
               this.callback = callback
+              console.log(this)
               // callback(this.RESULT_SUCCESS, octets);
             },
           }),
@@ -45,27 +48,28 @@ bleno.on('advertisingStart', function(error) {
       }),
     ]);
   }
-});
+}).bind(this));
 
 
 const {SPEECH_INPUT, COMMAND_INPUT} = require('../constants');
 
 client.on('connect', function () {
-  client.subscribe(COMMAND_INPUT, function (err) {
+  client.subscribe(SPEECH_INPUT, function (err) {
     // if (!err) {
     //   client.publish(SPEECH_INPUT, 'Hello mqtt')
     // }
   })
 })
 
-client.on('message', function (topic, message) {
+client.on('message', (function (topic, message) {
   // message is Buffer
   switch(topic) {
-    case COMMAND_INPUT:
-      console.log("Got command Input: ", message.toString())
+    case SPEECH_INPUT:
+      console.log("Got speech Input: ", message.toString())
+      console.log(this)
       break;
     default:
       console.log("Unrecognized Topic: ", topic, " with message: ", message.toString())
       console.log(message.toString())
   }
-})
+}).bind(this))
