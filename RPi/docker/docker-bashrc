@@ -18,3 +18,5 @@ export LS_OPTIONS='--color=auto'
 # alias rm='rm -i'
 # alias cp='cp -i'
 # alias mv='mv -i'
+
+export PYTHON=/usr/bin/python3
