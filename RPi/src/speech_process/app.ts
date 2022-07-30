@@ -1,11 +1,12 @@
-var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt://test.mosquitto.org')
-var {SPEECH_INPUT, COMMAND_INPUT} = require('../constants');
-var JCommandParser = require('./JCommandParser')
+import * as mqtt from 'mqtt'
+import {SPEECH_INPUT, COMMAND_INPUT} from '../constants.js';
+import {Parser} from './command_parser';
+
+const client  = mqtt.connect('mqtt://test.mosquitto.org')
 
 client.on('connect', function () {
   client.subscribe(SPEECH_INPUT, function (err) {})
-  JCommandParser.init()
+  // JCommandParser.init()
 })
 
 client.on('message', function (topic, message) {
@@ -22,7 +23,7 @@ client.on('message', function (topic, message) {
 })
 
 function parseCommand(message) {
-  const command = parseCommandInternal(message.toString().trim())
+  const command = Parser.parse(message.toString().trim())
   return {command}
 }
 
@@ -51,9 +52,10 @@ function parseMessage(message) {
 
   // var result = await axios.post()
   // var result = JCommandParser.parseText(message)
+  const result = ['PLAY', 'SOUNDCLOUD', BB_11]
   console.log("Parsing Message!", result)
 
-  return ['PLAY', 'SOUNDCLOUD', BB_11]
+  return result;
 }
 
 }

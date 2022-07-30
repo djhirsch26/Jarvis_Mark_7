@@ -1,11 +1,11 @@
 #! /bin/bash
 
 # Update Packages
-sudo apt-get update
-sudo apt-get dist-upgrade
+apt-get update
+apt-get dist-upgrade
 
 # Get Useful packages
-sudo apt-get install -y build-essential \
+apt-get install -y build-essential \
     nano \
     git \
     bluetooth \
@@ -25,8 +25,8 @@ sudo apt-get install -y build-essential \
 # curl -sL https://deb.nodesource.com/setup_14.x | sudo bash -
 # sudo apt-get install -y nodejs
 # Get current node version
-curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
-sudo apt-get install -y nodejs
+# curl -fsSL https://deb.nodesource.com/setup_current.x | sudo -E bash -
+# sudo apt-get install -y nodejs
 
 
 # mkdir -p /Jarvis/src/bluetooth
@@ -35,11 +35,11 @@ sudo apt-get install -y nodejs
 # popd > /dev/null
 
 # Get Python (for bleno) and python3
-sudo apt-get install python python3-pip
+apt-get install -y python3-pip
 
 # Set the PYTHON env variable
-export PYTHON=/usr/bin/python3
+# export PYTHON=/usr/bin/python3
 # pip install --upgrade setuptools wheel
 
 # Get npm
-sudo apt-get install npm
+# sudo apt-get install npm

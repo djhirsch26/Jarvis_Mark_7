@@ -35,7 +35,8 @@ Run the image with `docker run -it --privileged jarvis`
 5. Observe Background Container: `docker exec -it --user jarvis <container-id> /bin/bash`
 6. Deploy Overlays: `python3 deploy.py `
 
-
+### Running TS Locally
+Use `ts-node app.ts` to run using node.
 
 ### TODOs
 * At some point, fix mqtt to be a global link, this is for dockerization.

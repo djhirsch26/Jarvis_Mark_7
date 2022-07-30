@@ -1,8 +1,8 @@
-var mqtt = require('mqtt')
-var client  = mqtt.connect('mqtt://test.mosquitto.org')
-var {SPEECH_INPUT} = require('../constants');
+import * as mqtt from 'mqtt'
+import {SPEECH_INPUT} from '../constants.js';
+import * as readline from 'readline';
 
-const readline = require('readline');
+var client  = mqtt.connect('mqtt://test.mosquitto.org')
 
 const rl = readline.createInterface({
   input: process.stdin,
@@ -15,7 +15,7 @@ client.on('connect', function () {
 })
 
 function readTerm() {
-  rl.question('Give an input? ', (answer) => {
+  rl.question('Give an input?? ', (answer) => {
     client.publish(SPEECH_INPUT, `${answer}`)
     readTerm()
   });
